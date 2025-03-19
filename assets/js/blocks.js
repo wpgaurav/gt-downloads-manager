@@ -24,18 +24,18 @@
         }).catch(error => {
             console.error('Error fetching preview:', error);
             return '<div class="gtdm-error-message">' + 
-                   __('Error loading preview. Please check that the download exists.', 'gtdownloads-manager') + 
+            esc_html__('Error loading preview. Please check that the download exists.', 'gt-downloads-manager') + 
                    '</div>';
         });
     };
 
     // Register single download block
     registerBlockType('gtdm/single-download', {
-        title: __('GT Single Download', 'gtdownloads-manager'),
-        description: __('Display a single download item', 'gtdownloads-manager'),
+        title: __('GT Single Download', 'gt-downloads-manager'),
+        description: __('Display a single download item', 'gt-downloads-manager'),
         icon: blockIcon,
         category: 'widgets',
-        keywords: [__('download', 'gtdownloads-manager'), __('file', 'gtdownloads-manager'), __('resource', 'gtdownloads-manager')],
+        keywords: [__('download', 'gt-downloads-manager'), __('file', 'gt-downloads-manager'), __('resource', 'gt-downloads-manager')],
         
         attributes: {
             id: {
@@ -80,16 +80,16 @@
                     el(
                         PanelBody,
                         {
-                            title: __('Download Settings', 'gtdownloads-manager'),
+                            title: __('Download Settings', 'gt-downloads-manager'),
                             initialOpen: true
                         },
                         el(
                             SelectControl,
                             {
-                                label: __('Select Download', 'gtdownloads-manager'),
+                                label: __('Select Download', 'gt-downloads-manager'),
                                 value: id,
                                 options: [
-                                    { value: 0, label: __('-- Select a Download --', 'gtdownloads-manager') },
+                                    { value: 0, label: __('-- Select a Download --', 'gt-downloads-manager') },
                                     ...downloads
                                 ],
                                 onChange: function(newId) {
@@ -100,7 +100,7 @@
                         el(
                             SelectControl,
                             {
-                                label: __('Featured Image Size', 'gtdownloads-manager'),
+                                label: __('Featured Image Size', 'gt-downloads-manager'),
                                 value: image,
                                 options: imageSizes,
                                 onChange: function(newSize) {
@@ -115,8 +115,8 @@
                         Placeholder,
                         {
                             icon: 'download',
-                            label: __('GT Single Download', 'gtdownloads-manager'),
-                            instructions: __('Please select a download from the block settings.', 'gtdownloads-manager')
+                            label: __('GT Single Download', 'gt-downloads-manager'),
+                            instructions: __('Please select a download from the block settings.', 'gt-downloads-manager')
                         }
                     )
                     : loading
@@ -124,7 +124,7 @@
                             Placeholder,
                             {
                                 icon: 'download',
-                                label: __('Loading Download Preview', 'gtdownloads-manager')
+                                label: __('Loading Download Preview', 'gt-downloads-manager')
                             },
                             el(Spinner)
                         )
@@ -141,11 +141,11 @@
 
     // Register downloads list block
     registerBlockType('gtdm/downloads-list', {
-        title: __('GT Downloads List', 'gtdownloads-manager'),
-        description: __('Display a list of downloads', 'gtdownloads-manager'),
+        title: __('GT Downloads List', 'gt-downloads-manager'),
+        description: __('Display a list of downloads', 'gt-downloads-manager'),
         icon: blockIcon,
         category: 'widgets',
-        keywords: [__('downloads', 'gtdownloads-manager'), __('files', 'gtdownloads-manager'), __('resources', 'gtdownloads-manager')],
+        keywords: [__('downloads', 'gt-downloads-manager'), __('files', 'gt-downloads-manager'), __('resources', 'gt-downloads-manager')],
         
         attributes: {
             category: {
@@ -202,7 +202,7 @@
                     el(
                         PanelBody,
                         {
-                            title: __('Download List Settings', 'gtdownloads-manager'),
+                            title: __('Download List Settings', 'gt-downloads-manager'),
                             initialOpen: true
                         },
                         perPage < 0 || perPage > previewLimit ? 
@@ -213,15 +213,15 @@
                                     isDismissible: false,
                                     className: 'gtdm-editor-notice'
                                 },
-                                __(`For performance reasons, preview is limited to ${previewLimit} items. All items will be shown on the frontend.`, 'gtdownloads-manager')
+                                __(`For performance reasons, preview is limited to ${previewLimit} items. All items will be shown on the frontend.`, 'gt-downloads-manager')
                             ) : null,
                         el(
                             SelectControl,
                             {
-                                label: __('Category', 'gtdownloads-manager'),
+                                label: __('Category', 'gt-downloads-manager'),
                                 value: category,
                                 options: [
-                                    { value: '', label: __('All Categories', 'gtdownloads-manager') },
+                                    { value: '', label: __('All Categories', 'gt-downloads-manager') },
                                     ...categories
                                 ],
                                 onChange: function(newCategory) {
@@ -232,11 +232,11 @@
                         el(
                             RangeControl,
                             {
-                                label: __('Items Per Page', 'gtdownloads-manager'),
+                                label: __('Items Per Page', 'gt-downloads-manager'),
                                 value: perPage,
                                 min: -1,
                                 max: 50,
-                                help: __('-1 shows all downloads', 'gtdownloads-manager'),
+                                help: __('-1 shows all downloads', 'gt-downloads-manager'),
                                 onChange: function(newPerPage) {
                                     setAttributes({ perPage: newPerPage });
                                 }
@@ -245,11 +245,11 @@
                         el(
                             SelectControl,
                             {
-                                label: __('Layout Type', 'gtdownloads-manager'),
+                                label: __('Layout Type', 'gt-downloads-manager'),
                                 value: type,
                                 options: [
-                                    { value: 'grid', label: __('Grid Layout', 'gtdownloads-manager') },
-                                    { value: 'table', label: __('Table Layout', 'gtdownloads-manager') }
+                                    { value: 'grid', label: __('Grid Layout', 'gt-downloads-manager') },
+                                    { value: 'table', label: __('Table Layout', 'gt-downloads-manager') }
                                 ],
                                 onChange: function(newType) {
                                     setAttributes({ type: newType });
@@ -259,7 +259,7 @@
                         el(
                             SelectControl,
                             {
-                                label: __('Featured Image Size', 'gtdownloads-manager'),
+                                label: __('Featured Image Size', 'gt-downloads-manager'),
                                 value: image,
                                 options: imageSizes,
                                 onChange: function(newSize) {
@@ -274,7 +274,7 @@
                         Placeholder,
                         {
                             icon: 'download',
-                            label: __('Loading Downloads Preview', 'gtdownloads-manager')
+                            label: __('Loading Downloads Preview', 'gt-downloads-manager')
                         },
                         el(Spinner)
                     )

@@ -4,7 +4,9 @@ Plugin Name: GT Downloads Manager
 Description: Manage downloadable resources
 Version: 1.0
 Author: Gaurav Tiwari
-Text Domain: gtdownloads-manager
+Text Domain: gt-downloads-manager
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 declare(strict_types=1);

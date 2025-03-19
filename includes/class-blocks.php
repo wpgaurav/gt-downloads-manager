@@ -141,7 +141,7 @@ class Blocks {
         $download_results = $this->downloads->get_downloads(['id' => $id]);
         
         if (empty($download_results)) {
-            return new \WP_Error('no_download', __('Download not found', 'gtdownloads-manager'), ['status' => 404]);
+            return new \WP_Error('no_download', __('Download not found', 'gt-downloads-manager'), ['status' => 404]);
         }
         
         // Pass the image size to the download array
@@ -193,7 +193,7 @@ class Blocks {
         $preview_notice = '';
         if (count($downloads) >= $this->preview_limit) {
             $preview_notice = '<div class="gtdm-preview-notice">' . 
-                sprintf(__('Preview limited to %d items. All matching items will be shown on the frontend.', 'gtdownloads-manager'), 
+                sprintf(esc_html__('Preview limited to %d items. All matching items will be shown on the frontend.', 'gt-downloads-manager'), 
                 $this->preview_limit) . 
                 '</div>';
         }
@@ -234,7 +234,7 @@ class Blocks {
 
         // Get all unique categories
         global $wpdb;
-        $categories = $wpdb->get_col("SELECT DISTINCT category FROM " . DM_TABLE . " WHERE category != '' ORDER BY category ASC");
+        $categories = $wpdb->get_col($wpdb->prepare("SELECT DISTINCT category FROM %s WHERE category != '' ORDER BY category ASC", DM_TABLE));
         $category_options = [];
 
         foreach ($categories as $category) {
@@ -356,9 +356,9 @@ class Blocks {
             $preview_notice = '';
             if ($attributes['perPage'] < 0 || $attributes['perPage'] > $this->preview_limit) {
                 $preview_notice = '<div class="gtdm-preview-notice">' . 
-                    sprintf(__('Preview limited to %d items. All items will be shown on the frontend.', 'gtdownloads-manager'), 
-                    $this->preview_limit) . 
-                    '</div>';
+                sprintf(esc_html__('Preview limited to %d items. All items will be shown on the frontend.', 'gt-downloads-manager'), 
+                $this->preview_limit) . 
+                '</div>';
             }
             $output = '<div class="gtdm-editor-preview gtdm-editor-preview-list">' . 
                       $preview_notice . $output . '</div>';

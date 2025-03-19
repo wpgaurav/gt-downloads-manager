@@ -159,8 +159,9 @@ class Downloads {
         $count = intval($download['download_count']);
         if ($count <= 0) return '';
         
+        /* translators: %s: download count number */
         $text = sprintf(
-            _n('%s download', '%s downloads', $count, 'gtdownloads-manager'),
+            _n('%s download', '%s downloads', $count, 'gt-downloads-manager'),
             number_format_i18n($count)
         );
         
@@ -204,9 +205,6 @@ class Downloads {
     }
 
     protected function get_download_button(array $download) {
-        // Replace this line:
-        $url = $download['direct_url'] ?: wp_get_attachment_url($download['file_url']);
-        // With:
         $url = $this->get_download_url($download);
         
         if (!$url) return '';
@@ -216,7 +214,7 @@ class Downloads {
             esc_url($url),
             $this->get_icon(),
             // Also fix the text domain here
-            esc_html__('Download', 'gtdownloads-manager')
+            esc_html__('Download', 'gt-downloads-manager')
         );
         
         return apply_filters('dm_download_button', $button, $download, $url);
@@ -253,8 +251,8 @@ class Downloads {
 public function track_download($id) {
     // Get current count
     $count = (int) $this->wpdb->get_var($this->wpdb->prepare(
-        "SELECT download_count FROM " . DM_TABLE . " WHERE id = %d",
-        $id
+        "SELECT download_count FROM %s WHERE id = %d",
+        DM_TABLE, $id
     ));
     
     // Increment count

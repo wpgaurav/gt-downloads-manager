@@ -135,7 +135,7 @@ By default, your download data is preserved when uninstalling. If you want to co
 
 = Is the plugin translatable? =
 
-Yes, the plugin is fully translatable and uses the 'gtdownloads-manager' text domain.
+Yes, the plugin is fully translatable and uses the 'gt-downloads-manager' text domain.
 
 == Developer Documentation ==
 

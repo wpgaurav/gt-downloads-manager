@@ -28,8 +28,8 @@ class Admin {
 
     public function register_admin_menu() {
         add_menu_page(
-            __('Downloads Manager', 'gtdownloads-manager'),
-            __('Downloads', 'gtdownloads-manager'),
+            __('Downloads Manager', 'gt-downloads-manager'),
+            __('Downloads', 'gt-downloads-manager'),
             'manage_options',
             'gt-downloads-manager',
             [$this, 'render_admin_page'],
@@ -64,18 +64,18 @@ class Admin {
     'nonce' => wp_create_nonce('dm-admin-nonce'),
     'ajaxurl' => admin_url('admin-ajax.php'),
     'i18n' => [
-        'confirmDelete' => __('Are you sure you want to delete this download? This action cannot be undone.', 'gtdownloads-manager'),
-        'errorSaving' => __('Error saving download.', 'gtdownloads-manager'),
-        'errorDeleting' => __('Error deleting download.', 'gtdownloads-manager'),
-        'selectImage' => __('Select Image', 'gtdownloads-manager'),
-        'useImage' => __('Use this image', 'gtdownloads-manager'),
-        'selectFile' => __('Select File', 'gtdownloads-manager'),
-        'useFile' => __('Use this file', 'gtdownloads-manager'),
-        'noImage' => __('No image selected', 'gtdownloads-manager'),
-        'noFile' => __('No file selected', 'gtdownloads-manager'),
-        'noDownloads' => __('No downloads found.', 'gtdownloads-manager'),
-        'successSaving' => __('Download saved successfully.', 'gtdownloads-manager'),
-        'successDeleting' => __('Download deleted successfully.', 'gtdownloads-manager')
+        'confirmDelete' => __('Are you sure you want to delete this download? This action cannot be undone.', 'gt-downloads-manager'),
+        'errorSaving' => __('Error saving download.', 'gt-downloads-manager'),
+        'errorDeleting' => __('Error deleting download.', 'gt-downloads-manager'),
+        'selectImage' => __('Select Image', 'gt-downloads-manager'),
+        'useImage' => __('Use this image', 'gt-downloads-manager'),
+        'selectFile' => __('Select File', 'gt-downloads-manager'),
+        'useFile' => __('Use this file', 'gt-downloads-manager'),
+        'noImage' => __('No image selected', 'gt-downloads-manager'),
+        'noFile' => __('No file selected', 'gt-downloads-manager'),
+        'noDownloads' => __('No downloads found.', 'gt-downloads-manager'),
+        'successSaving' => __('Download saved successfully.', 'gt-downloads-manager'),
+        'successDeleting' => __('Download deleted successfully.', 'gt-downloads-manager')
     ]
 ]);
     }
@@ -126,19 +126,19 @@ class Admin {
         
         ?>
         <div class="wrap">
-            <h1 class="wp-heading-inline"><?php _e('Downloads Manager', 'gtdownloads-manager'); ?></h1>
-            <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager&action=new')); ?>" class="page-title-action"><?php _e('Add New', 'gtdownloads-manager'); ?></a>
+            <h1 class="wp-heading-inline"><?php esc_html_e('Downloads Manager', 'gt-downloads-manager'); ?></h1>
+            <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager&action=new')); ?>" class="page-title-action"><?php esc_html_e('Add New', 'gt-downloads-manager'); ?></a>
             
             <hr class="wp-header-end">
             
             <div class="notice notice-info notice-alt">
-                <p><?php _e('Use shortcodes to display downloads on your site:', 'gtdownloads-manager'); ?></p>
-                <p><code>[gt_downloads]</code> - <?php _e('Display all downloads. Defaults to grid. Add type="table" to show table layout.', 'gtdownloads-manager'); ?></p>
-                <p><code>[gt_downloads category="category-name"]</code> - <?php _e('Display downloads from a specific category', 'gtdownloads-manager'); ?></p>
-                <p><code>[gt_download id="123"]</code> - <?php _e('Display a specific download', 'gtdownloads-manager'); ?></p>
-                <p><code>[gt_downloads type="table" image="thumbnail"]</code> - <?php _e('Display all downloads with thumbnail size featured image in table layout.', 'gtdownloads-manager'); ?></p>
-                <p><?php _e('You can also use Block Editor/Gutenberg Blocks. These are easiest to use.', 'gtdownloads-manager'); ?></p>
-                <p><a href="https://gauravtiwari.org/snippet/gt-downloads-manager-plugin/" target="_blank"> <?php _e('See detailed documentation', 'gtdownloads-manager'); ?></a></p>
+                <p><?php esc_html_e('Use shortcodes to display downloads on your site:', 'gt-downloads-manager'); ?></p>
+                <p><code>[gt_downloads]</code> - <?php esc_html_e('Display all downloads. Defaults to grid. Add type="table" to show table layout.', 'gt-downloads-manager'); ?></p>
+                <p><code>[gt_downloads category="category-name"]</code> - <?php esc_html_e('Display downloads from a specific category', 'gt-downloads-manager'); ?></p>
+                <p><code>[gt_download id="123"]</code> - <?php esc_html_e('Display a specific download', 'gt-downloads-manager'); ?></p>
+                <p><code>[gt_downloads type="table" image="thumbnail"]</code> - <?php esc_html_e('Display all downloads with thumbnail size featured image in table layout.', 'gt-downloads-manager'); ?></p>
+                <p><?php esc_html_e('You can also use Block Editor/Gutenberg Blocks. These are easiest to use.', 'gt-downloads-manager'); ?></p>
+                <p><a href="https://gauravtiwari.org/snippet/gt-downloads-manager-plugin/" target="_blank"> <?php esc_html_e('See detailed documentation', 'gt-downloads-manager'); ?></a></p>
             </div>
             <?php
             // Get all unique categories
@@ -153,14 +153,14 @@ if (!empty($all_categories)) : ?>
             <form method="get">
                 <input type="hidden" name="page" value="gt-downloads-manager">
                 <select name="category">
-                    <option value=""><?php _e('All Categories', 'gtdownloads-manager'); ?></option>
+                    <option value=""><?php esc_html_e('All Categories', 'gt-downloads-manager'); ?></option>
                     <?php foreach ($all_categories as $cat) : ?>
                         <option value="<?php echo esc_attr($cat); ?>" <?php selected($selected_category, $cat); ?>>
                             <?php echo esc_html($cat); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <input type="submit" class="button" value="<?php _e('Filter', 'gtdownloads-manager'); ?>">
+                <input type="submit" class="button" value="<?php esc_html_e('Filter', 'gt-downloads-manager'); ?>">
             </form>
         </div>
         <div class="tablenav-pages search-box">
@@ -169,9 +169,9 @@ if (!empty($all_categories)) : ?>
             <?php if ($selected_category) : ?>
                 <input type="hidden" name="category" value="<?php echo esc_attr($selected_category); ?>">
             <?php endif; ?>
-            <label class="screen-reader-text" for="dm-search-input"><?php _e('Search Downloads:', 'gtdownloads-manager'); ?></label>
+            <label class="screen-reader-text" for="dm-search-input"><?php esc_html_e('Search Downloads:', 'gt-downloads-manager'); ?></label>
             <input type="search" id="dm-search-input" name="s" value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : ''; ?>">
-            <input type="submit" id="search-submit" class="button" value="<?php _e('Search Downloads', 'gtdownloads-manager'); ?>">
+            <input type="submit" id="search-submit" class="button" value="<?php esc_html_e('Search Downloads', 'gt-downloads-manager'); ?>">
         </form>
     </div>
         <br class="clear">
@@ -180,17 +180,17 @@ if (!empty($all_categories)) : ?>
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
-                        <th><?php _e('ID', 'gtdownloads-manager'); ?></th>
-                        <th><?php _e('Title', 'gtdownloads-manager'); ?></th>
-                        <th><?php _e('Category', 'gtdownloads-manager'); ?></th>
-                        <th><?php _e('Date', 'gtdownloads-manager'); ?></th>
-                        <th><?php _e('Actions', 'gtdownloads-manager'); ?></th>
+                        <th><?php esc_html_e('ID', 'gt-downloads-manager'); ?></th>
+                        <th><?php esc_html_e('Title', 'gt-downloads-manager'); ?></th>
+                        <th><?php esc_html_e('Category', 'gt-downloads-manager'); ?></th>
+                        <th><?php esc_html_e('Date', 'gt-downloads-manager'); ?></th>
+                        <th><?php esc_html_e('Actions', 'gt-downloads-manager'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($downloads)) : ?>
                         <tr>
-                            <td colspan="5"><?php _e('No downloads found.', 'gtdownloads-manager'); ?></td>
+                            <td colspan="5"><?php esc_html_e('No downloads found.', 'gt-downloads-manager'); ?></td>
                         </tr>
                     <?php else : ?>
                         <?php foreach ($downloads as $download) : ?>
@@ -200,10 +200,10 @@ if (!empty($all_categories)) : ?>
                                     <strong><?php echo esc_html($download->title); ?></strong>
                                     <div class="row-actions">
                                         <span class="edit">
-                                            <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager&action=edit&id=' . $download->id)); ?>"><?php _e('Edit', 'gtdownloads-manager'); ?></a> |
+                                            <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager&action=edit&id=' . $download->id)); ?>"><?php esc_html_e('Edit', 'gt-downloads-manager'); ?></a> |
                                         </span>
                                         <span class="trash">
-                                            <a href="#" class="dm-delete" data-id="<?php echo esc_attr($download->id); ?>"><?php _e('Delete', 'gtdownloads-manager'); ?></a>
+                                            <a href="#" class="dm-delete" data-id="<?php echo esc_attr($download->id); ?>"><?php esc_html_e('Delete', 'gt-downloads-manager'); ?></a>
                                         </span>
                                     </div>
                                 </td>
@@ -221,7 +221,10 @@ if (!empty($all_categories)) : ?>
         <div class="tablenav bottom">
             <div class="tablenav-pages">
                 <span class="displaying-num">
-                    <?php printf(_n('%s item', '%s items', $total_downloads, 'gtdownloads-manager'), number_format_i18n($total_downloads)); ?>
+                    <?php 
+                    /* translators: %s: number of downloads */
+                    printf(_n('%s item', '%s items', $total_downloads, 'gt-downloads-manager'), number_format_i18n($total_downloads)); 
+                    ?>
                 </span>
                 <span class="pagination-links">
                     <?php
@@ -251,14 +254,14 @@ if (!empty($all_categories)) : ?>
             $download = !empty($results) ? (array)$results[0] : null;
             
             if (!$download) {
-                wp_die(__('Download not found.', 'gtdownloads-manager'));
+                wp_die(__('Download not found.', 'gt-downloads-manager'));
             }
         }
 
         $is_new = empty($download);
         ?>
         <div class="wrap">
-            <h1><?php echo $is_new ? __('Add New Download', 'gtdownloads-manager') : __('Edit Download', 'gtdownloads-manager'); ?></h1>
+            <h1><?php echo $is_new ? __('Add New Download', 'gt-downloads-manager') : __('Edit Download', 'gt-downloads-manager'); ?></h1>
             
             <form id="dm-download-form" class="dm-form">
                 <?php wp_nonce_field('dm-save-download', 'dm-nonce'); ?>
@@ -270,25 +273,25 @@ if (!empty($all_categories)) : ?>
                 <table class="form-table">
                     <tbody>
                         <tr>
-                            <th scope="row"><label for="title"><?php _e('Title', 'gtdownloads-manager'); ?></label></th>
+                            <th scope="row"><label for="title"><?php esc_html_e('Title', 'gt-downloads-manager'); ?></label></th>
                             <td>
                                 <input name="title" type="text" id="title" class="regular-text" value="<?php echo $is_new ? '' : esc_attr($download['title']); ?>" required>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="category"><?php _e('Category', 'gtdownloads-manager'); ?></label></th>
+                            <th scope="row"><label for="category"><?php esc_html_e('Category', 'gt-downloads-manager'); ?></label></th>
                             <td>
                                 <input name="category" type="text" id="category" class="regular-text" value="<?php echo $is_new ? '' : esc_attr($download['category']); ?>">
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label for="description"><?php _e('Description', 'gtdownloads-manager'); ?></label></th>
+                            <th scope="row"><label for="description"><?php esc_html_e('Description', 'gt-downloads-manager'); ?></label></th>
                             <td>
                                 <textarea name="description" id="description" class="large-text" rows="5"><?php echo $is_new ? '' : esc_textarea($download['description']); ?></textarea>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label><?php _e('Featured Image', 'gtdownloads-manager'); ?></label></th>
+                            <th scope="row"><label><?php esc_html_e('Featured Image', 'gt-downloads-manager'); ?></label></th>
                             <td>
                                 <div class="dm-featured-image-container">
                                     <div class="dm-featured-image-preview">
@@ -296,24 +299,24 @@ if (!empty($all_categories)) : ?>
                                         if (!$is_new && !empty($download['featured_image_id'])) {
                                             echo wp_get_attachment_image($download['featured_image_id'], 'medium');
                                         } else {
-                                            echo '<div class="dm-no-image">' . __('No image selected', 'gtdownloads-manager') . '</div>';
+                                            echo '<div class="dm-no-image">' . __('No image selected', 'gt-downloads-manager') . '</div>';
                                         }
                                         ?>
                                     </div>
                                     <input type="hidden" name="featured_image_id" id="featured_image_id" value="<?php echo $is_new ? '' : esc_attr($download['featured_image_id']); ?>">
-                                    <button type="button" class="button dm-select-image"><?php _e('Select Image', 'gtdownloads-manager'); ?></button>
-                                    <button type="button" class="button dm-remove-image"><?php _e('Remove Image', 'gtdownloads-manager'); ?></button>
+                                    <button type="button" class="button dm-select-image"><?php esc_html_e('Select Image', 'gt-downloads-manager'); ?></button>
+                                    <button type="button" class="button dm-remove-image"><?php esc_html_e('Remove Image', 'gt-downloads-manager'); ?></button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row"><label><?php _e('Download File', 'gtdownloads-manager'); ?></label></th>
+                            <th scope="row"><label><?php esc_html_e('Download File', 'gt-downloads-manager'); ?></label></th>
                             <td>
                                 <div class="dm-file-selection">
                                     <p>
                                         <label>
                                             <input type="radio" name="file_source" value="media" <?php echo $is_new || (!empty($download['file_url']) && empty($download['direct_url'])) ? 'checked' : ''; ?>>
-                                            <?php _e('Upload file to Media Library', 'gtdownloads-manager'); ?>
+                                            <?php esc_html_e('Upload file to Media Library', 'gt-downloads-manager'); ?>
                                         </label>
                                     </p>
                                     
@@ -325,18 +328,18 @@ if (!empty($all_categories)) : ?>
                                                     <span class="dm-filename"><?php echo esc_html(basename($file_url)); ?></span>
                                                 <?php endif; ?>
                                             <?php else : ?>
-                                                <span class="dm-no-file"><?php _e('No file selected', 'gtdownloads-manager'); ?></span>
+                                                <span class="dm-no-file"><?php esc_html_e('No file selected', 'gt-downloads-manager'); ?></span>
                                             <?php endif; ?>
                                         </div>
                                         <input type="hidden" name="file_url" id="file_url" value="<?php echo $is_new ? '' : esc_attr($download['file_url']); ?>">
-                                        <button type="button" class="button dm-select-file"><?php _e('Select File', 'gtdownloads-manager'); ?></button>
-                                        <button type="button" class="button dm-remove-file"><?php _e('Remove File', 'gtdownloads-manager'); ?></button>
+                                        <button type="button" class="button dm-select-file"><?php esc_html_e('Select File', 'gt-downloads-manager'); ?></button>
+                                        <button type="button" class="button dm-remove-file"><?php esc_html_e('Remove File', 'gt-downloads-manager'); ?></button>
                                     </div>
                                     
                                     <p>
                                         <label>
                                             <input type="radio" name="file_source" value="direct" <?php echo !$is_new && !empty($download['direct_url']) ? 'checked' : ''; ?>>
-                                            <?php _e('Direct URL', 'gtdownloads-manager'); ?>
+                                            <?php esc_html_e('Direct URL', 'gt-downloads-manager'); ?>
                                         </label>
                                     </p>
                                     
@@ -350,8 +353,8 @@ if (!empty($all_categories)) : ?>
                 </table>
 
                 <div class="dm-form-actions">
-                    <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager')); ?>" class="button"><?php _e('Cancel', 'gtdownloads-manager'); ?></a>
-                    <button type="submit" class="button button-primary"><?php _e('Save Download', 'gtdownloads-manager'); ?></button>
+                    <a href="<?php echo esc_url(admin_url('admin.php?page=gt-downloads-manager')); ?>" class="button"><?php esc_html_e('Cancel', 'gt-downloads-manager'); ?></a>
+                    <button type="submit" class="button button-primary"><?php esc_html_e('Save Download', 'gt-downloads-manager'); ?></button>
                 </div>
                 
                 <div id="dm-form-feedback" class="notice notice-success hidden">
@@ -366,7 +369,7 @@ if (!empty($all_categories)) : ?>
         check_ajax_referer('dm-admin-nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Permission denied.', 'gt-downloads-manager')]);
         }
 
         $data = [
@@ -380,7 +383,7 @@ if (!empty($all_categories)) : ?>
         ];
 
         if (empty($data['title'])) {
-            wp_send_json_error(['message' => __('Title is required.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Title is required.', 'gt-downloads-manager')]);
         }
 
         $file_source = sanitize_key($_POST['file_source'] ?? 'media');
@@ -394,7 +397,7 @@ if (!empty($all_categories)) : ?>
         }
 
         if (empty($data['file_url']) && empty($data['direct_url'])) {
-            wp_send_json_error(['message' => __('Please specify a download file or URL.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Please specify a download file or URL.', 'gt-downloads-manager')]);
         }
 
         // Use the Downloads class to save the data
@@ -402,11 +405,11 @@ if (!empty($all_categories)) : ?>
         
         if ($result) {
             wp_send_json_success([
-                'message' => __('Download saved successfully!', 'gtdownloads-manager'),
+                'message' => __('Download saved successfully!', 'gt-downloads-manager'),
                 'redirect' => admin_url('admin.php?page=gt-downloads-manager')
             ]);
         } else {
-            wp_send_json_error(['message' => __('Error saving download.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Error saving download.', 'gt-downloads-manager')]);
         }
     }
 
@@ -414,13 +417,13 @@ if (!empty($all_categories)) : ?>
         check_ajax_referer('dm-admin-nonce', 'nonce');
         
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Permission denied.', 'gt-downloads-manager')]);
         }
 
         $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         
         if ($id <= 0) {
-            wp_send_json_error(['message' => __('Invalid download ID.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Invalid download ID.', 'gt-downloads-manager')]);
         }
 
         // Use the Downloads class to delete the download
@@ -428,10 +431,10 @@ if (!empty($all_categories)) : ?>
         
         if ($result) {
             wp_send_json_success([
-                'message' => __('Download deleted successfully!', 'gtdownloads-manager')
+                'message' => __('Download deleted successfully!', 'gt-downloads-manager')
             ]);
         } else {
-            wp_send_json_error(['message' => __('Error deleting download.', 'gtdownloads-manager')]);
+            wp_send_json_error(['message' => __('Error deleting download.', 'gt-downloads-manager')]);
         }
     }
 }

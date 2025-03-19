@@ -104,12 +104,12 @@ class Shortcodes {
         
         // Table header
         $html .= '<thead><tr>';
-        $html .= '<th class="dm-col-image">' . esc_html__('Image', 'gtdownloads-manager') . '</th>';
-        $html .= '<th class="dm-col-title">' . esc_html__('Title', 'gtdownloads-manager') . '</th>';
-        $html .= '<th class="dm-col-category">' . esc_html__('Category', 'gtdownloads-manager') . '</th>';
-        $html .= '<th class="dm-col-desc">' . esc_html__('Description', 'gtdownloads-manager') . '</th>';
-        $html .= '<th class="dm-col-download">' . esc_html__('Download', 'gtdownloads-manager') . '</th>';
-        $html .= '<th class="dm-col-count">' . esc_html__('Downloads', 'gtdownloads-manager') . '</th>';
+        $html .= '<th class="dm-col-image">' . esc_html__('Image', 'gt-downloads-manager') . '</th>';
+        $html .= '<th class="dm-col-title">' . esc_html__('Title', 'gt-downloads-manager') . '</th>';
+        $html .= '<th class="dm-col-category">' . esc_html__('Category', 'gt-downloads-manager') . '</th>';
+        $html .= '<th class="dm-col-desc">' . esc_html__('Description', 'gt-downloads-manager') . '</th>';
+        $html .= '<th class="dm-col-download">' . esc_html__('Download', 'gt-downloads-manager') . '</th>';
+        $html .= '<th class="dm-col-count">' . esc_html__('Downloads', 'gt-downloads-manager') . '</th>';
         $html .= '</tr></thead>';
         
         // Table body
@@ -120,7 +120,7 @@ class Shortcodes {
             $html .= '<tr>';
             
             // Image column with custom size
-            $html .= '<td class="dm-col-image" data-label="' . esc_attr__('Image', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-image" data-label="' . esc_attr__('Image', 'gt-downloads-manager') . '">';
             if (!empty($download['featured_image_id'])) {
                 $html .= wp_get_attachment_image($download['featured_image_id'], $image_size);
             } else {
@@ -129,36 +129,36 @@ class Shortcodes {
             $html .= '</td>';
             
             // Title column
-            $html .= '<td class="dm-col-title" data-label="' . esc_attr__('Title', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-title" data-label="' . esc_attr__('Title', 'gt-downloads-manager') . '">';
             $html .= '<h4>' . esc_html($download['title']) . '</h4>';
             $html .= '</td>';
             
             // Category column
-            $html .= '<td class="dm-col-category" data-label="' . esc_attr__('Category', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-category" data-label="' . esc_attr__('Category', 'gt-downloads-manager') . '">';
             if (!empty($download['category'])) {
                 $html .= '<span class="dm-category-label">' . esc_html($download['category']) . '</span>';
             }
             $html .= '</td>';
             
             // Description column
-            $html .= '<td class="dm-col-desc" data-label="' . esc_attr__('Description', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-desc" data-label="' . esc_attr__('Description', 'gt-downloads-manager') . '">';
             $html .= '<div class="dm-description">' . wp_kses_post($download['description']) . '</div>';
             $html .= '</td>';
             
             // Download button column
-            $html .= '<td class="dm-col-download" data-label="' . esc_attr__('Download', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-download" data-label="' . esc_attr__('Download', 'gt-downloads-manager') . '">';
             $url = $this->downloads->get_download_url($download);
             if ($url) {
                 $html .= sprintf(
                     '<a href="%s" class="dm-table-download-button">%s</a>',
                     esc_url($url),
-                    esc_html__('Download', 'gtdownloads-manager')
+                    esc_html__('Download', 'gt-downloads-manager')
                 );
             }
             $html .= '</td>';
             
             // Download count column
-            $html .= '<td class="dm-col-count" data-label="' . esc_attr__('Downloads', 'gtdownloads-manager') . '">';
+            $html .= '<td class="dm-col-count" data-label="' . esc_attr__('Downloads', 'gt-downloads-manager') . '">';
             if (isset($download['download_count']) && $download['download_count'] > 0) {
                 $html .= '<span class="dm-count-badge">' . number_format_i18n($download['download_count']) . '</span>';
             } else {

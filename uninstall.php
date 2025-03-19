@@ -12,7 +12,7 @@ if ($delete_data) {
     global $wpdb;
     
     // Delete the custom table
-    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}gtdownloads_manager");
+    $wpdb->query($wpdb->prepare("DROP TABLE IF EXISTS %s", $wpdb->prefix . 'gtdownloads_manager'));
     
     // Delete all plugin options
     delete_option('gtdm_delete_data_on_uninstall');
