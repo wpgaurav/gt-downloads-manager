@@ -1,0 +1,199 @@
+/* Table layout styles for GT Downloads Manager */
+
+.dm-table-responsive {
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+}
+
+.dm-downloads-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.dm-downloads-table th,
+.dm-downloads-table td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.dm-downloads-table thead th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.dm-downloads-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Column widths */
+.dm-col-image {
+    width: 80px;
+}
+
+.dm-col-image img {
+    max-width: 60px;
+    height: auto;
+    display: block;
+    border-radius: 3px;
+}
+
+.dm-col-title {
+    width: 18%;
+}
+
+.dm-col-title h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.dm-col-category {
+    width: 12%;
+}
+
+.dm-col-download {
+    width: 100px;
+}
+
+.dm-col-count {
+    width: 90px;
+    text-align: center;
+}
+
+.dm-no-image {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+}
+
+.dm-category-label {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #eee;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #555;
+}
+
+.dm-table-download-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007cba;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.dm-table-download-button:hover {
+    background-color: #0069a1;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dm-count-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #f0f0f0;
+    color: #555;
+    font-size: 13px;
+    border-radius: 10px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.dm-count-badge.dm-count-zero {
+    background-color: #eee;
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 800px) {
+    .dm-col-desc {
+        display: none;
+    }
+    
+    .dm-col-category {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .dm-downloads-table thead {
+        display: none;
+    }
+    
+    .dm-downloads-table tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    
+    .dm-downloads-table td {
+        display: block;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    .dm-downloads-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .dm-downloads-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        text-align: left;
+    }
+    
+    .dm-col-image {
+        width: 100%;
+        text-align: center;
+        padding-left: 15px;
+    }
+    
+    .dm-col-image img, .dm-no-image {
+        margin: 0 auto;
+    }
+    
+    .dm-col-title {
+        width: 100%;
+    }
+    
+    .dm-col-category {
+        width: 100%;
+    }
+    
+    .dm-col-download {
+        width: 100%;
+        text-align: center;
+        padding-left: 15px;
+    }
+    
+    .dm-col-count {
+        width: 100%;
+        text-align: center;
+        padding-left: 15px;
+    }
+    
+    .dm-table-download-button {
+        width: 100%;
+    }
+}
