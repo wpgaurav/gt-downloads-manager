@@ -59,7 +59,7 @@ class Blocks {
                 'perPage' => [
                     'type' => 'number',
                     'default' => -1
-                },
+                ],
                 'page' => [
                     'type' => 'number',
                     'default' => 1
@@ -75,7 +75,7 @@ class Blocks {
                 'isPreview' => [
                     'type' => 'boolean',
                     'default' => false
-                }
+                ]
             ],
             'render_callback' => [$this, 'render_downloads_list_block']
         ]);
