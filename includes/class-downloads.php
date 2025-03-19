@@ -170,14 +170,19 @@ class Downloads {
     protected function get_featured_image(array $download) {
         if (empty($download['featured_image_id'])) return '';
         
+        // Get image size from the download array if available, otherwise default to 'medium'
+        $image_size = isset($download['_image_size']) ? $download['_image_size'] : 'medium';
+        
         $image = wp_get_attachment_image(
             $download['featured_image_id'],
-            apply_filters('dm_featured_image_size', 'medium'),
+            $image_size,
             false,
             ['class' => 'dm-featured-image']
         );
         
-        return apply_filters('dm_featured_image', $image, $download);
+        if (!$image) return '';
+        
+        return $image;
     }
 
     protected function get_title(array $download) {

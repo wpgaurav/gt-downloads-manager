@@ -133,9 +133,10 @@ class Admin {
             
             <div class="notice notice-info notice-alt">
                 <p><?php _e('Use shortcodes to display downloads on your site:', 'gtdownloads-manager'); ?></p>
-                <p><code>[gt_downloads]</code> - <?php _e('Display all downloads', 'gtdownloads-manager'); ?></p>
+                <p><code>[gt_downloads]</code> - <?php _e('Display all downloads. Defaults to grid. Add type="table" to show table layout.', 'gtdownloads-manager'); ?></p>
                 <p><code>[gt_downloads category="category-name"]</code> - <?php _e('Display downloads from a specific category', 'gtdownloads-manager'); ?></p>
                 <p><code>[gt_download id="123"]</code> - <?php _e('Display a specific download', 'gtdownloads-manager'); ?></p>
+                <p><code>[gt_downloads type="table" image="thumbnail"]</code> - <?php _e('Display all downloads with thumbnail size featured image in table layout.', 'gtdownloads-manager'); ?></p>
             </div>
             <?php
             // Get all unique categories
