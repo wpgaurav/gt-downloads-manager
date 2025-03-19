@@ -24,6 +24,7 @@ require_once DM_PATH . 'includes/class-downloads.php';
 require_once DM_PATH . 'includes/class-admin.php';
 require_once DM_PATH . 'includes/class-widgets.php';
 require_once DM_PATH . 'includes/class-settings.php';
+require_once DM_PATH . 'includes/class-blocks.php'; // Add this line
 
 register_activation_hook(__FILE__, ['GTDownloadsManager\Database', 'create_table']);
 
@@ -31,6 +32,7 @@ register_activation_hook(__FILE__, ['GTDownloadsManager\Database', 'create_table
 add_action('plugins_loaded', function() {
     GTDownloadsManager\Downloads::instance();
     GTDownloadsManager\Shortcodes::instance();
+    GTDownloadsManager\Blocks::instance(); // Add this line
     
     // Initialize admin interface only in admin area
     if (is_admin()) {

@@ -1,0 +1,42 @@
+.gtdm-block-preview {
+    background: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.gtdm-block-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #23282d;
+    display: flex;
+    align-items: center;
+}
+
+.gtdm-block-title .dashicons {
+    margin-right: 8px;
+}
+
+.gtdm-block-description {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.gtdm-block-settings-list {
+    margin: 0;
+    padding: 0 0 0 25px;
+}
+
+.gtdm-block-settings-list li {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.gtdm-downloads-list-preview {
+    min-height: 150px;
+}
+
+.gtdm-single-download-preview {
+    min-height: 100px;
+}

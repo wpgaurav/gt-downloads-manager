@@ -1,8 +1,8 @@
 === GT Downloads Manager ===
 Contributors: gauravtiwari
-Tags: downloads, file manager, resources, document manager, download counter
+Tags: downloads, file manager, resources, document manager, download counter, file sharing, gutenberg blocks
 Requires at least: 5.0
-Tested up to: 6.3
+Tested up to: 6.8
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,95 +12,80 @@ A lightweight yet powerful downloads manager plugin to showcase and track downlo
 
 == Description ==
 
-GT Downloads Manager helps you create, manage, and display downloadable resources on your WordPress site with ease. Organize files by categories, track download counts, and display them using customizable shortcodes or widgets.
+GT Downloads Manager helps you create, manage, and display downloadable resources on your WordPress site with ease. Track download counts, organize files by categories, and present them in an elegant, responsive layout that looks great on all devices.
 
-### Features
+### Key Features
 
-* **Easy Management**: Add, edit, and organize downloadable files from a simple admin interface
+* **Modern Admin Interface**: Intuitive dashboard to add, edit, and manage downloadable resources
 * **Multiple File Sources**: Upload files to WordPress Media Library or link to external URLs
-* **Download Tracking**: Automatically tracks download counts for analytics
-* **Categorization**: Organize downloads into categories for better user navigation
-* **Featured Images**: Add featured images to make your downloads visually appealing
-* **Responsive Design**: Beautifully displays on all devices with a modern grid layout
-* **Multiple Display Options**:
-  * Shortcodes for posts and pages
-  * Widget for sidebars
-  * PHP functions for developers
-* **Clean Uninstall**: Option to keep or remove data when uninstalling the plugin
+* **Download Tracking**: Automatically tracks and displays download counts
+* **Responsive Layouts**: Choose between grid or table layouts that work on all devices
+* **Categorization**: Organize downloads into categories for easier navigation
+* **Featured Images**: Add visual appeal with featured images for each download
+* **Search & Filter**: Find downloads quickly with built-in search and category filtering
+* **Gutenberg Blocks**: Easy-to-use blocks for displaying downloads in the block editor
+* **Shortcodes**: Display downloads anywhere using simple shortcodes with customization options
+* **Widget Support**: Show downloads in sidebars and widget-ready areas
+* **Developer-Friendly**: Rich set of filters for theme and plugin developers to customize functionality
+* **Clean Uninstall**: Optional data removal when uninstalling the plugin
+
+### Display Options
+
+GT Downloads Manager provides multiple ways to display your downloads:
+
+* **Grid Layout**: Modern card-based layout (default)
+* **Table Layout**: Organized tabular layout with sortable columns
+* **Customizable Image Sizes**: Choose from WordPress image sizes for featured images
+* **Widget View**: Compact list view for sidebars
 
 ### Usage
 
-**Shortcodes:**
+**Gutenberg Blocks:**
 
-* `[gt_downloads]` - Display all downloads
-* `[gt_downloads category="category-name"]` - Display downloads from a specific category
+The plugin provides two custom Gutenberg blocks:
+* **GT Single Download** - Display a specific download item
+* **GT Downloads List** - Display a list of downloads with various options
+
+**Basic Shortcodes:**
+
+* `[gt_downloads]` - Display all downloads in grid layout
 * `[gt_download id="123"]` - Display a specific download
+* `[gt_downloads category="category-name"]` - Display downloads from a specific category
+
+**Advanced Shortcode Options:**
+
+* `[gt_downloads type="table"]` - Display downloads in table layout
+* `[gt_downloads per_page="10"]` - Limit the number of downloads shown
+* `[gt_downloads image="thumbnail"]` - Control the featured image size
+* `[gt_downloads category="guides" type="table" image="medium"]` - Combined options
 
 **Widget:**
 
-Use the GT Downloads widget to display downloads in widget areas like sidebars or footers.
+Use the GT Downloads widget to display downloads in widget areas like sidebars or footers with options for:
+* Title
+* Category filter
+* Number of downloads to show
 
 **Developer Functions:**
 
-For developers looking to integrate downloads directly into their themes:
+Integration with themes or plugins:
 
 ```php
+// Get downloads instance
 $downloads = GTDownloadsManager\Downloads::instance();
-$items = $downloads->get_downloads(['category' => 'example']);
 
+// Get all downloads in a specific category
+$items = $downloads->get_downloads([
+    'category' => 'tutorials',
+    'per_page' => 5,
+    'page' => 1,
+    'search' => 'guide'
+]);
+
+// Display downloads
 foreach ($items as $item) {
     echo $downloads->get_download_html((array)$item);
 }
-```
 
-== Installation ==
-
-1. Upload `gt-downloads-manager` directory to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Navigate to 'Downloads' in your admin menu to start adding downloads
-4. Use the shortcodes, widgets, or PHP functions to display downloads on your site
-
-== Frequently Asked Questions ==
-
-= Can I limit the number of downloads shown? =
-
-Yes, you can use the shortcode parameter: `[gt_downloads per_page="5"]` to limit the number of downloads displayed.
-
-= Does this plugin track download counts? =
-
-Yes, each time a user downloads a file, the count is tracked and displayed with the download.
-
-= Can I use this for digital products? =
-
-This plugin is primarily designed for free downloads. For selling digital products, we recommend using an e-commerce solution.
-
-= Will this work with any theme? =
-
-Yes, GT Downloads Manager is designed to work with any properly coded WordPress theme.
-
-= What happens when I uninstall the plugin? =
-
-By default, your download data is preserved when uninstalling. If you want to completely remove all data, enable this option in the plugin settings before uninstalling.
-
-== Screenshots ==
-
-1. Admin downloads listing
-2. Adding a new download
-3. Download display on the frontend
-4. Widget display 
-5. Settings page
-
-== Changelog ==
-
-= 1.0 =
-* Initial release with core functionality
-
-== Upgrade Notice ==
-
-= 1.0 =
-Initial release of GT Downloads Manager.
-
-== Credits ==
-
-* Developed by Gaurav Tiwari
-* Icon graphics using Material Design icons
+// Get download URL that tracks download counts
+$download_url = $downloads->get_download_url($download_data);

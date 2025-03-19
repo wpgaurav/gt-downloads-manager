@@ -137,6 +137,7 @@ class Admin {
                 <p><code>[gt_downloads category="category-name"]</code> - <?php _e('Display downloads from a specific category', 'gtdownloads-manager'); ?></p>
                 <p><code>[gt_download id="123"]</code> - <?php _e('Display a specific download', 'gtdownloads-manager'); ?></p>
                 <p><code>[gt_downloads type="table" image="thumbnail"]</code> - <?php _e('Display all downloads with thumbnail size featured image in table layout.', 'gtdownloads-manager'); ?></p>
+                <p><a hre="https://gauravtiwari.org/snippet/gt-downloads-manager-plugin/" target="_blank"> <?php _e('See detailed documentation', 'gtdownloads-manager'); ?></a></p>
             </div>
             <?php
             // Get all unique categories
