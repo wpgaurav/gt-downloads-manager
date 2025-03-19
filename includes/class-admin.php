@@ -143,7 +143,14 @@ class Admin {
             <?php
             // Get all unique categories
             global $wpdb;
-            $all_categories = $wpdb->get_col("SELECT DISTINCT category FROM " . DM_TABLE . " WHERE category != '' ORDER BY category ASC");
+            $table_name = esc_sql(DM_TABLE); // Ensure DM_TABLE is sanitized
+
+            $all_categories = $wpdb->get_col(
+                $wpdb->prepare(
+                    "SELECT DISTINCT category FROM {$table_name} WHERE category != %s ORDER BY category ASC",
+                    ''
+                )
+            );
             $selected_category = isset($_GET['category']) ? sanitize_text_field($_GET['category']) : '';
         
 

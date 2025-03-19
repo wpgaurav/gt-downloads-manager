@@ -8,8 +8,8 @@ class Widget extends \WP_Widget {
     public function __construct() {
         parent::__construct(
             'gtdm_downloads_widget',
-            __('GT Downloads', 'gt-downloads-manager'),
-            ['description' => __('Display a list of downloadable resources', 'gt-downloads-manager')]
+            esc_html__('GT Downloads', 'gt-downloads-manager'),
+            ['description' => esc_html__('Display a list of downloadable resources', 'gt-downloads-manager')]
         );
         
         $this->downloads = Downloads::instance();
@@ -19,7 +19,7 @@ class Widget extends \WP_Widget {
         echo $args['before_widget'];
         
         if (!empty($instance['title'])) {
-            echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
+            echo $args['before_title'] . apply_filters('widget_title', esc_html($instance['title'])) . $args['after_title'];
         }
         
         $category = !empty($instance['category']) ? $instance['category'] : '';
@@ -47,7 +47,7 @@ class Widget extends \WP_Widget {
     }
     
     public function form($instance) {
-        $title = !empty($instance['title']) ? $instance['title'] : __('Downloads', 'gt-downloads-manager');
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('Downloads', 'gt-downloads-manager');
         $category = !empty($instance['category']) ? $instance['category'] : '';
         $limit = !empty($instance['limit']) ? intval($instance['limit']) : 5;
         
