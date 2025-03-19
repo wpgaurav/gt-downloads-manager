@@ -1,6 +1,4 @@
 <?php
-// filepath: /Users/gauravtiwari/Development/gt-downloads-manager/includes/class-blocks.php
-<?php
 namespace GTDownloadsManager;
 
 class Blocks {
