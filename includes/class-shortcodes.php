@@ -74,7 +74,7 @@ class Shortcodes {
         return $this->generate_output($downloads, $atts['type'], $atts['image']);
     }
 
-    private function generate_output(array $downloads, $type = 'grid', $image_size = 'medium') {
+    public function generate_output(array $downloads, $type = 'grid', $image_size = 'medium') {
         if (empty($downloads)) return '';
         
         if ($type === 'table') {
@@ -84,7 +84,7 @@ class Shortcodes {
         }
     }
     
-    private function generate_grid_output(array $downloads, $image_size = 'medium') {
+    public function generate_grid_output(array $downloads, $image_size = 'medium') {
         $html = '<div class="dm-downloads-container">';
         foreach ($downloads as $download) {
             // Pass image size to Downloads class
@@ -98,7 +98,7 @@ class Shortcodes {
         return $html;
     }
     
-    private function generate_table_output(array $downloads, $image_size = 'thumbnail') {
+    public function generate_table_output(array $downloads, $image_size = 'thumbnail') {
         $html = '<div class="dm-table-responsive">';
         $html .= '<table class="dm-downloads-table">';
         

@@ -16,11 +16,16 @@
         return apiFetch({
             path: endpoint + '?' + new URLSearchParams(params),
             method: 'GET',
+            headers: {
+                'X-WP-Nonce': gtdmBlocks.nonce
+            }
         }).then(response => {
             return response.html || '';
         }).catch(error => {
             console.error('Error fetching preview:', error);
-            return '';
+            return '<div class="gtdm-error-message">' + 
+                   __('Error loading preview. Please check that the download exists.', 'gtdownloads-manager') + 
+                   '</div>';
         });
     };
 
@@ -58,6 +63,8 @@
                             setPreview(html);
                             setLoading(false);
                         });
+                } else {
+                    setPreview(''); // Clear preview when no id is selected
                 }
             }, [id, image]);
 

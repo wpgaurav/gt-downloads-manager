@@ -90,7 +90,19 @@ class Blocks {
             'callback' => [$this, 'get_single_download_preview'],
             'permission_callback' => function() {
                 return current_user_can('edit_posts');
-            }
+            },
+            'args' => [
+                'id' => [
+                    'validate_callback' => function($param) {
+                        return is_numeric($param);
+                    }
+                ],
+                'image' => [
+                    'validate_callback' => function($param) {
+                        return !empty($param);
+                    }
+                ]
+            ]
         ]);
 
         register_rest_route('gtdm/v1', '/preview-list', [
@@ -126,17 +138,22 @@ class Blocks {
         $id = $request['id'];
         $image = $request['image'];
         
-        $download = $this->downloads->get_downloads(['id' => $id]);
+        $download_results = $this->downloads->get_downloads(['id' => $id]);
         
-        if (empty($download)) {
+        if (empty($download_results)) {
             return new \WP_Error('no_download', __('Download not found', 'gtdownloads-manager'), ['status' => 404]);
         }
         
-        $html = $this->render_single_download_block([
-            'id' => $id,
-            'image' => $image,
-            'isPreview' => true
-        ]);
+        // Pass the image size to the download array
+        $download = (array)$download_results[0];
+        $download['_image_size'] = $image;
+        
+        // Generate HTML directly using downloads class
+        $html = $this->downloads->get_download_html($download);
+        
+        if (!empty($html)) {
+            $html = '<div class="gtdm-editor-preview gtdm-editor-preview-single">' . $html . '</div>';
+        }
         
         return new \WP_REST_Response(['html' => $html]);
     }
@@ -149,14 +166,40 @@ class Blocks {
         $type = $request->get_param('type') ?: 'grid';
         $image = $request->get_param('image') ?: 'medium';
         
-        $html = $this->render_downloads_list_block([
+        // Get downloads with a limit
+        $downloads = $this->downloads->get_downloads([
             'category' => $category,
-            'perPage' => $this->preview_limit,
-            'page' => 1,
-            'type' => $type,
-            'image' => $image,
-            'isPreview' => true
+            'per_page' => $this->preview_limit,
+            'page' => 1
         ]);
+        
+        $shortcode = \GTDownloadsManager\Shortcodes::instance();
+        
+        // Use the correct shortcode method based on layout type
+        if ($type === 'table') {
+            // For table layout
+            $html = $shortcode->generate_table_output($downloads, $image);
+        } else {
+            // For grid layout, we need to add image_size to each download
+            foreach ($downloads as &$download) {
+                $download_array = (array)$download;
+                $download_array['_image_size'] = $image;
+                $download = $download_array;
+            }
+            $html = $shortcode->generate_grid_output($downloads, $image);
+        }
+        
+        // Add preview notice if needed
+        $preview_notice = '';
+        if (count($downloads) >= $this->preview_limit) {
+            $preview_notice = '<div class="gtdm-preview-notice">' . 
+                sprintf(__('Preview limited to %d items. All matching items will be shown on the frontend.', 'gtdownloads-manager'), 
+                $this->preview_limit) . 
+                '</div>';
+        }
+        
+        $html = '<div class="gtdm-editor-preview gtdm-editor-preview-list">' . 
+               $preview_notice . $html . '</div>';
         
         return new \WP_REST_Response(['html' => $html]);
     }
@@ -218,7 +261,7 @@ class Blocks {
             'imageSizes' => $image_size_options,
             'previewLimit' => $this->preview_limit,
             'restUrl' => esc_url_raw(rest_url()),
-            'nonce' => wp_create_nonce('wp_rest')
+            'nonce' => wp_create_nonce('wp_rest') // Make sure this nonce is used
         ]);
 
         // Add frontend styles for the editor
@@ -258,18 +301,22 @@ class Blocks {
             'isPreview' => false
         ]);
         
-        $shortcode = \GTDownloadsManager\Shortcodes::instance();
-        $output = $shortcode->single_download([
-            'id' => $attributes['id'],
-            'image' => $attributes['image']
-        ]);
-        
-        if ($attributes['isPreview'] && !empty($output)) {
-            // Add preview wrapper when in editor
-            $output = '<div class="gtdm-editor-preview gtdm-editor-preview-single">' . $output . '</div>';
+        if (!$attributes['id']) {
+            return '';
         }
         
-        return $output;
+        $download_results = $this->downloads->get_downloads(['id' => $attributes['id']]);
+        
+        if (empty($download_results)) {
+            return '';
+        }
+        
+        // Pass the image size to the download array
+        $download = (array)$download_results[0];
+        $download['_image_size'] = $attributes['image'];
+        
+        // Generate HTML using downloads class
+        return $this->downloads->get_download_html($download);
     }
 
     /**
