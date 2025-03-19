@@ -1,0 +1,67 @@
+/* Admin styles for GT Downloads Manager */
+
+.dm-form-actions {
+    margin-top: 20px;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+}
+
+.dm-featured-image-container {
+    margin-bottom: 10px;
+}
+
+.dm-featured-image-preview {
+    margin-bottom: 10px;
+    max-width: 300px;
+}
+
+.dm-featured-image-preview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.dm-no-image, .dm-no-file {
+    padding: 20px;
+    background: #f0f0f0;
+    border: 1px dashed #ccc;
+    text-align: center;
+    color: #888;
+}
+
+.dm-remove-image, .dm-remove-file {
+    margin-left: 10px;
+}
+
+.dm-file-selection {
+    margin-top: 10px;
+}
+
+.dm-file-preview {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.dm-filename {
+    display: inline-block;
+    word-break: break-all;
+    max-width: 400px;
+}
+
+.dm-form #dm-form-feedback {
+    margin-top: 15px;
+}
+
+/* Radio buttons styling */
+.dm-file-selection input[type="radio"] {
+    margin-right: 5px;
+}
+
+.dm-upload-container, .dm-direct-url-container {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}

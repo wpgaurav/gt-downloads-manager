@@ -1,0 +1,48 @@
+/* Frontend styles for GT Downloads Manager */
+
+.dm-downloads-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.dm-download {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+}
+.dm-featured-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.dm-download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #007cba;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+.dm-download-button:hover {
+    background: #0069a1;
+    color: #fff;
+}
+.dm-category {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 0.5rem;
+}
+.dm-download-count {
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 0.5rem;
+}
