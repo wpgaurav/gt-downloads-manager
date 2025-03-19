@@ -1,67 +1,295 @@
 /* Admin styles for GT Downloads Manager */
 
-.dm-form-actions {
-    margin-top: 20px;
-    padding: 15px 0;
-    border-top: 1px solid #ddd;
+/* General Admin Styling */
+.gtdm-admin-header {
+    background: #fff;
+    border-left: 4px solid #2271b1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin: 20px 0;
+    padding: 15px;
 }
 
+.gtdm-admin-header h1 {
+    margin-top: 0;
+}
+
+.gtdm-admin-subheader {
+    color: #666;
+    font-size: 16px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+.dm-form-actions {
+    margin-top: 30px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dm-form-actions .button-primary {
+    min-width: 120px;
+}
+
+.form-table th {
+    width: 200px;
+    vertical-align: top;
+    padding-top: 20px;
+}
+
+/* Featured Image Selector */
 .dm-featured-image-container {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .dm-featured-image-preview {
-    margin-bottom: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
     max-width: 300px;
+    overflow: hidden;
 }
 
 .dm-featured-image-preview img {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ddd;
-    padding: 5px;
+    border-radius: 3px;
+    display: block;
+    margin: 0 auto;
+}
+
+.dm-featured-image-preview:hover {
+    border-color: #2271b1;
 }
 
 .dm-no-image, .dm-no-file {
-    padding: 20px;
+    padding: 40px;
     background: #f0f0f0;
     border: 1px dashed #ccc;
     text-align: center;
     color: #888;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.dm-button-group {
+    display: flex;
+    gap: 10px;
 }
 
 .dm-remove-image, .dm-remove-file {
-    margin-left: 10px;
+    color: #cc0000;
 }
 
+/* File Selection Area */
 .dm-file-selection {
-    margin-top: 10px;
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.dm-file-selection p {
+    margin-top: 0;
+}
+
+.dm-file-selection label {
+    font-weight: 500;
+}
+
+.dm-upload-container, .dm-direct-url-container {
+    margin: 15px 0 20px 25px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-left: 4px solid #ddd;
+    border-radius: 0 4px 4px 0;
 }
 
 .dm-file-preview {
-    margin: 10px 0;
-    padding: 10px;
+    margin: 10px 0 15px;
+    padding: 12px;
     border: 1px solid #ddd;
-    display: inline-block;
+    border-radius: 4px;
+    background: #fff;
     min-width: 200px;
+    display: inline-block;
 }
 
 .dm-filename {
     display: inline-block;
     word-break: break-all;
     max-width: 400px;
+    font-family: monospace;
+    color: #333;
+    background: #f1f1f1;
+    padding: 3px 8px;
+    border-radius: 2px;
 }
 
+/* Form Feedback */
 .dm-form #dm-form-feedback {
-    margin-top: 15px;
+    margin: 20px 0 0;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Radio buttons styling */
 .dm-file-selection input[type="radio"] {
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
-.dm-upload-container, .dm-direct-url-container {
-    margin-left: 25px;
-    margin-bottom: 15px;
+/* Downloads List Table */
+.wp-list-table .column-id {
+    width: 60px;
+}
+
+.wp-list-table .column-category {
+    width: 15%;
+}
+
+.wp-list-table .column-date {
+    width: 15%;
+}
+
+.wp-list-table .column-actions {
+    width: 15%;
+    text-align: center;
+}
+
+.download-id {
+    background: #f0f0f0;
+    border-radius: 50%;
+    color: #333;
+    display: inline-block;
+    font-weight: 600;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+
+.download-category {
+    background: #e7f5fa;
+    border-radius: 3px;
+    color: #0073aa;
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 8px;
+}
+
+/* Search & Filter Area */
+.tablenav .search-box {
+    float: right;
+}
+
+.tablenav-pages {
+    margin: 5px 0;
+}
+
+/* Notice Box Styling */
+.gtdm-notice {
+    background: #f8f9fa;
+    border-left: 4px solid #2271b1;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.gtdm-notice h3 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.gtdm-notice code {
+    background: #f0f2f5;
+    color: #008800;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.gtdm-notice p {
+    margin: 0.5em 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.gtdm-shortcode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.gtdm-shortcode-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.gtdm-shortcode-box h4 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.gtdm-shortcode-example {
+    background: #f6f7f7;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-family: monospace;
+}
+
+.gtdm-shortcode-desc {
+    color: #666;
+    font-size: 13px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 782px) {
+    .form-table th {
+        width: 100%;
+        display: block;
+        padding-bottom: 0;
+    }
+    
+    .form-table td {
+        display: block;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .dm-featured-image-preview {
+        max-width: 100%;
+    }
+    
+    .dm-form-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .dm-form-actions .button {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tablenav .search-box {
+        float: none;
+        margin-top: 15px;
+        width: 100%;
+    }
 }

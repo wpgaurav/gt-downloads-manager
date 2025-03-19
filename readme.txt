@@ -89,3 +89,96 @@ foreach ($items as $item) {
 
 // Get download URL that tracks download counts
 $download_url = $downloads->get_download_url($download_data);
+== Installation ==
+
+Upload gt-downloads-manager directory to the /wp-content/plugins/ directory
+Activate the plugin through the 'Plugins' menu in WordPress
+Navigate to 'Downloads' in your admin menu to start adding downloads
+Use Gutenberg blocks, shortcodes, widgets, or PHP functions to display downloads on your site
+== Frequently Asked Questions ==
+
+= How do I use Gutenberg blocks to display downloads? =
+
+In the block editor, search for "GT Downloads" to find our custom blocks. We provide:
+
+"GT Single Download" block for displaying a specific download
+"GT Downloads List" block for displaying multiple downloads with various options
+= How do I display downloads in a table layout? =
+
+With Gutenberg blocks, select the "GT Downloads List" block and choose "Table Layout" in the block settings.
+
+With shortcodes, use the type parameter: [gt_downloads type="table"]
+
+= Can I change the image size of featured images? =
+
+Yes, both Gutenberg blocks and shortcodes support this. In blocks, use the "Featured Image Size" setting. With shortcodes, use the image parameter: [gt_downloads image="large"] or any registered image size in WordPress.
+
+= How do I limit the number of downloads shown? =
+
+In blocks, use the "Items Per Page" setting. With shortcodes, use the per_page parameter: [gt_downloads per_page="5"]
+
+= Does this plugin track download counts? =
+
+Yes, each time a user downloads a file, the count is tracked and can be displayed with the download.
+
+= Can I use this for selling digital products? =
+
+This plugin is designed for free downloads. For selling digital products, we recommend using an e-commerce solution.
+
+= Will this work with any theme? =
+
+Yes, GT Downloads Manager is designed to work with any properly coded WordPress theme.
+
+= What happens when I uninstall the plugin? =
+
+By default, your download data is preserved when uninstalling. If you want to completely remove all data, enable this option in the plugin settings before uninstalling.
+
+= Is the plugin translatable? =
+
+Yes, the plugin is fully translatable and uses the 'gtdownloads-manager' text domain.
+
+== Developer Documentation ==
+
+GT Downloads Manager offers multiple filters for developers to customize its output and behavior:
+
+Available Filters
+Content Filters:
+
+dm_before_download - HTML content before each download item
+dm_after_download - HTML content after each download item
+dm_title - Customize the title HTML
+dm_description - Customize the description HTML
+dm_category - Customize the category HTML
+dm_download_button - Customize the download button
+dm_download_icon - Customize the download icon SVG
+dm_category_icon - Customize the category icon SVG
+Example:
+
+Query Filters:
+
+dm_downloads_args - Modify query arguments before getting downloads
+Example:
+
+== Screenshots ==
+
+Admin downloads listing with search and filtering
+Adding a new download with media uploader
+Downloads displayed in grid layout on the frontend
+Downloads displayed in table layout
+Widget display on sidebar
+Settings page for plugin configuration
+Gutenberg blocks for downloads
+== Changelog ==
+
+= 1.0 =
+
+Initial release with core functionality
+Grid and table layout options
+Download tracking and statistics
+Widget support
+Category organization
+Developer API and filters
+Gutenberg blocks support
+== Upgrade Notice ==
+
+= 1.0 = Initial release of GT Downloads Manager. Enjoy the new features and enhancements!
