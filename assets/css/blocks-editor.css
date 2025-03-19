@@ -40,3 +40,31 @@
 .gtdm-single-download-preview {
     min-height: 100px;
 }
+
+/* Editor Preview Styles */
+.gtdm-editor-preview {
+    position: relative;
+}
+
+.gtdm-editor-preview .dm-downloads-container {
+    /* Adjust grid for editor view */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.gtdm-preview-notice {
+    background: #f0f6fc;
+    border-left: 4px solid #72aee6;
+    color: #2c3338;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.gtdm-editor-notice {
+    margin: 0 0 15px 0;
+}
+
+.components-placeholder.components-placeholder {
+    background: #fff;
+    border: 1px dashed #ccc;
+}

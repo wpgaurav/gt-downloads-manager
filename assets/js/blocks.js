@@ -1,15 +1,28 @@
-(function(blocks, element, components, editor, i18n, data) {
+(function(blocks, element, components, editor, i18n, data, apiFetch) {
     const { __ } = i18n;
     const { registerBlockType } = blocks;
     const { InspectorControls } = editor;
-    const { PanelBody, SelectControl, RangeControl, ToggleControl } = components;
-    const { Fragment } = element;
+    const { PanelBody, SelectControl, RangeControl, Notice, Placeholder, Spinner } = components;
+    const { Fragment, useState, useEffect } = element;
     const el = element.createElement;
 
     // Icon for the blocks
     const blockIcon = el('svg', { width: 24, height: 24, viewBox: '0 0 24 24' },
         el('path', { d: 'M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z' })
     );
+
+    // Function to fetch preview HTML
+    const fetchPreview = (endpoint, params) => {
+        return apiFetch({
+            path: endpoint + '?' + new URLSearchParams(params),
+            method: 'GET',
+        }).then(response => {
+            return response.html || '';
+        }).catch(error => {
+            console.error('Error fetching preview:', error);
+            return '';
+        });
+    };
 
     // Register single download block
     registerBlockType('gtdm/single-download', {
@@ -33,6 +46,20 @@
         edit: function(props) {
             const { attributes, setAttributes } = props;
             const { id, image } = attributes;
+            const [preview, setPreview] = useState('');
+            const [loading, setLoading] = useState(false);
+
+            // Load preview when attributes change
+            useEffect(() => {
+                if (id > 0) {
+                    setLoading(true);
+                    fetchPreview(`/gtdm/v1/preview-single/${id}/${image}`, {})
+                        .then(html => {
+                            setPreview(html);
+                            setLoading(false);
+                        });
+                }
+            }, [id, image]);
 
             const downloads = gtdmBlocks.downloads || [];
             const imageSizes = gtdmBlocks.imageSizes || [];
@@ -68,7 +95,7 @@
                             {
                                 label: __('Featured Image Size', 'gtdownloads-manager'),
                                 value: image,
-                                options: imageSizes.map(size => ({ value: size.value, label: size.label })),
+                                options: imageSizes,
                                 onChange: function(newSize) {
                                     setAttributes({ image: newSize });
                                 }
@@ -76,26 +103,31 @@
                         )
                     )
                 ),
-                el(
-                    'div',
-                    { className: 'gtdm-block-preview gtdm-single-download-preview' },
-                    id === 0 
-                        ? el('p', {}, __('Please select a download from the block settings.', 'gtdownloads-manager'))
-                        : el('div', { className: 'gtdm-block-content' },
-                            el('div', { className: 'gtdm-block-title' }, 
-                                el('span', { className: 'dashicons dashicons-download' }),
-                                ' ' + downloads.find(d => d.value === id)?.label || __('Download', 'gtdownloads-manager')
-                            ),
-                            el('p', { className: 'gtdm-block-description' },
-                                __('This download will be displayed here with the selected settings.', 'gtdownloads-manager')
-                            )
+                id === 0 
+                    ? el(
+                        Placeholder,
+                        {
+                            icon: 'download',
+                            label: __('GT Single Download', 'gtdownloads-manager'),
+                            instructions: __('Please select a download from the block settings.', 'gtdownloads-manager')
+                        }
+                    )
+                    : loading
+                        ? el(
+                            Placeholder,
+                            {
+                                icon: 'download',
+                                label: __('Loading Download Preview', 'gtdownloads-manager')
+                            },
+                            el(Spinner)
                         )
-                )
+                        : el('div', {
+                            dangerouslySetInnerHTML: { __html: preview }
+                        })
             );
         },
 
         save: function() {
-            // Dynamic block, so render is handled server-side
             return null;
         }
     });
@@ -134,9 +166,25 @@
         edit: function(props) {
             const { attributes, setAttributes } = props;
             const { category, perPage, type, image } = attributes;
+            const [preview, setPreview] = useState('');
+            const [loading, setLoading] = useState(true);
+
+            // Load preview when attributes change
+            useEffect(() => {
+                setLoading(true);
+                fetchPreview('/gtdm/v1/preview-list', {
+                    category: category,
+                    type: type,
+                    image: image
+                }).then(html => {
+                    setPreview(html);
+                    setLoading(false);
+                });
+            }, [category, type, image]);
 
             const categories = gtdmBlocks.categories || [];
             const imageSizes = gtdmBlocks.imageSizes || [];
+            const previewLimit = gtdmBlocks.previewLimit || 6;
 
             return el(
                 Fragment,
@@ -150,6 +198,16 @@
                             title: __('Download List Settings', 'gtdownloads-manager'),
                             initialOpen: true
                         },
+                        perPage < 0 || perPage > previewLimit ? 
+                            el(
+                                Notice,
+                                {
+                                    status: 'info',
+                                    isDismissible: false,
+                                    className: 'gtdm-editor-notice'
+                                },
+                                __(`For performance reasons, preview is limited to ${previewLimit} items. All items will be shown on the frontend.`, 'gtdownloads-manager')
+                            ) : null,
                         el(
                             SelectControl,
                             {
@@ -196,7 +254,7 @@
                             {
                                 label: __('Featured Image Size', 'gtdownloads-manager'),
                                 value: image,
-                                options: imageSizes.map(size => ({ value: size.value, label: size.label })),
+                                options: imageSizes,
                                 onChange: function(newSize) {
                                     setAttributes({ image: newSize });
                                 }
@@ -204,33 +262,22 @@
                         )
                     )
                 ),
-                el(
-                    'div',
-                    { className: 'gtdm-block-preview gtdm-downloads-list-preview' },
-                    el('div', { className: 'gtdm-block-content' },
-                        el('div', { className: 'gtdm-block-title' },
-                            el('span', { className: 'dashicons dashicons-download' }),
-                            ' ' + __('Downloads List', 'gtdownloads-manager')
-                        ),
-                        el('p', { className: 'gtdm-block-description' },
-                            __('This block will display your downloads with the following settings:', 'gtdownloads-manager')
-                        ),
-                        el('ul', { className: 'gtdm-block-settings-list' },
-                            el('li', {}, __('Layout: ', 'gtdownloads-manager') + 
-                                (type === 'grid' ? __('Grid', 'gtdownloads-manager') : __('Table', 'gtdownloads-manager'))),
-                            el('li', {}, __('Category: ', 'gtdownloads-manager') + 
-                                (category ? category : __('All Categories', 'gtdownloads-manager'))),
-                            el('li', {}, __('Items: ', 'gtdownloads-manager') + 
-                                (perPage === -1 ? __('All', 'gtdownloads-manager') : perPage)),
-                            el('li', {}, __('Image Size: ', 'gtdownloads-manager') + image)
-                        )
+                loading
+                    ? el(
+                        Placeholder,
+                        {
+                            icon: 'download',
+                            label: __('Loading Downloads Preview', 'gtdownloads-manager')
+                        },
+                        el(Spinner)
                     )
-                )
+                    : el('div', {
+                        dangerouslySetInnerHTML: { __html: preview }
+                    })
             );
         },
 
         save: function() {
-            // Dynamic block, so render is handled server-side
             return null;
         }
     });
@@ -240,5 +287,6 @@
     window.wp.components,
     window.wp.blockEditor || window.wp.editor,
     window.wp.i18n,
-    window.wp.data
+    window.wp.data,
+    window.wp.apiFetch
 );
