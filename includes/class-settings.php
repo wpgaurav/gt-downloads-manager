@@ -29,8 +29,10 @@ class Settings {
     }
 
     public function register_settings() {
-        // Register settings
-        register_setting('gtdm_settings', 'gtdm_delete_data_on_uninstall');
+        // Register settings with sanitization callback
+        register_setting('gtdm_settings', 'gtdm_delete_data_on_uninstall', [
+            'sanitize_callback' => [$this, 'sanitize_checkbox']
+        ]);
 
         // Add settings section
         add_settings_section(
@@ -83,5 +85,9 @@ class Settings {
             </p>
         </fieldset>
         <?php
+    }
+
+    public function sanitize_checkbox($input) {
+        return $input ? 1 : 0;
     }
 }
