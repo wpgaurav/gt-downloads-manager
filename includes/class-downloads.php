@@ -130,7 +130,7 @@ class Downloads {
         return $result !== false;
     }
 
-    protected function get_download_html(array $download) {
+    public function get_download_html(array $download) {
         $html = apply_filters('dm_before_download', '', $download);
         
         $image = $this->get_featured_image($download);
@@ -199,14 +199,19 @@ class Downloads {
     }
 
     protected function get_download_button(array $download) {
+        // Replace this line:
         $url = $download['direct_url'] ?: wp_get_attachment_url($download['file_url']);
+        // With:
+        $url = $this->get_download_url($download);
+        
         if (!$url) return '';
         
         $button = sprintf(
             '<a href="%s" class="dm-download-button" download>%s%s</a>',
             esc_url($url),
             $this->get_icon(),
-            esc_html__('Download', 'downloads-manager')
+            // Also fix the text domain here
+            esc_html__('Download', 'gtdownloads-manager')
         );
         
         return apply_filters('dm_download_button', $button, $download, $url);

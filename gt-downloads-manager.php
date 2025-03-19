@@ -22,7 +22,7 @@ require_once DM_PATH . 'includes/class-database.php';
 require_once DM_PATH . 'includes/class-shortcodes.php';
 require_once DM_PATH . 'includes/class-downloads.php';
 require_once DM_PATH . 'includes/class-admin.php';
-require_once DM_PATH . 'includes/class-widget.php';
+require_once DM_PATH . 'includes/class-widgets.php';
 require_once DM_PATH . 'includes/class-settings.php';
 
 register_activation_hook(__FILE__, ['GTDownloadsManager\Database', 'create_table']);

@@ -139,8 +139,9 @@ class Admin {
             </div>
             <?php
             // Get all unique categories
-$all_categories = $this->wpdb->get_col("SELECT DISTINCT category FROM " . DM_TABLE . " WHERE category != '' ORDER BY category ASC");
-$selected_category = isset($_GET['category']) ? sanitize_text_field($_GET['category']) : '';
+            global $wpdb;
+            $all_categories = $wpdb->get_col("SELECT DISTINCT category FROM " . DM_TABLE . " WHERE category != '' ORDER BY category ASC");
+        
 
 if (!empty($all_categories)) : ?>
     <div class="tablenav top">
