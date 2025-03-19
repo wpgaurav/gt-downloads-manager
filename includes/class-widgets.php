@@ -40,14 +40,14 @@ class Widget extends \WP_Widget {
             }
             echo '</ul>';
         } else {
-            echo '<p>' . __('No downloads available.', 'gt-downloads-manager') . '</p>';
+            echo '<p>' . esc_html__('No downloads available.', 'gt-downloads-manager') . '</p>';
         }
         
         echo $args['after_widget'];
     }
     
     public function form($instance) {
-            $title = !empty($instance['title']) ? $instance['title'] : __('Downloads', 'gt-downloads-manager');
+        $title = !empty($instance['title']) ? $instance['title'] : __('Downloads', 'gt-downloads-manager');
         $category = !empty($instance['category']) ? $instance['category'] : '';
         $limit = !empty($instance['limit']) ? intval($instance['limit']) : 5;
         
@@ -58,17 +58,16 @@ class Widget extends \WP_Widget {
         if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", DM_TABLE)) === DM_TABLE) {
             $categories = $wpdb->get_col($wpdb->prepare("SELECT DISTINCT category FROM %s WHERE category != '' ORDER BY category ASC", DM_TABLE));
         }
-        }
         
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e()('Title:', 'gt-downloads-manager'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html_e('Title:', 'gt-downloads-manager'); ?></label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('category')); ?>"><?php esc_html_e()('Category:', 'gt-downloads-manager'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('category')); ?>"><?php esc_html_e('Category:', 'gt-downloads-manager'); ?></label>
             <select class="widefat" id="<?php echo esc_attr($this->get_field_id('category')); ?>" name="<?php echo esc_attr($this->get_field_name('category')); ?>">
-                <option value="" <?php selected(empty($category)); ?>><?php esc_html_e()('All Categories', 'gt-downloads-manager'); ?></option>
+                <option value="" <?php selected(empty($category)); ?>><?php esc_html_e('All Categories', 'gt-downloads-manager'); ?></option>
                 <?php foreach ($categories as $cat) : ?>
                     <option value="<?php echo esc_attr($cat); ?>" <?php selected($category, $cat); ?>>
                         <?php echo esc_html($cat); ?>
@@ -77,7 +76,7 @@ class Widget extends \WP_Widget {
             </select>
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('limit')); ?>"><?php esc_html_e()('Number to show:', 'gt-downloads-manager'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('limit')); ?>"><?php esc_html_e('Number to show:', 'gt-downloads-manager'); ?></label>
             <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('limit')); ?>" name="<?php echo esc_attr($this->get_field_name('limit')); ?>" type="number" min="1" max="20" value="<?php echo esc_attr($limit); ?>">
         </p>
         <?php

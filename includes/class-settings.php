@@ -20,8 +20,8 @@ class Settings {
     public function add_settings_page() {
         add_submenu_page(
             'gt-downloads-manager',
-            __('Downloads Settings', 'gt-downloads-manager'),
-            __('Settings', 'gt-downloads-manager'),
+            esc_html__('Downloads Settings', 'gt-downloads-manager'),
+            esc_html__('Settings', 'gt-downloads-manager'),
             'manage_options',
             'gtdm-settings',
             [$this, 'render_settings_page']
@@ -35,7 +35,7 @@ class Settings {
         // Add settings section
         add_settings_section(
             'gtdm_uninstall_section',
-            __('Uninstall Options', 'gt-downloads-manager'),
+            esc_html__('Uninstall Options', 'gt-downloads-manager'),
             [$this, 'render_uninstall_section'],
             'gtdm_settings'
         );
@@ -43,7 +43,7 @@ class Settings {
         // Add settings field
         add_settings_field(
             'gtdm_delete_data',
-            __('Delete Plugin Data', 'gt-downloads-manager'),
+            esc_html__('Delete Plugin Data', 'gt-downloads-manager'),
             [$this, 'render_delete_data_field'],
             'gtdm_settings',
             'gtdm_uninstall_section'
@@ -53,7 +53,7 @@ class Settings {
     public function render_settings_page() {
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e()('Downloads Manager Settings', 'gt-downloads-manager'); ?></h1>
+            <h1><?php esc_html_e('Downloads Manager Settings', 'gt-downloads-manager'); ?></h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('gtdm_settings');
@@ -66,7 +66,7 @@ class Settings {
     }
 
     public function render_uninstall_section() {
-        echo '<p>' . __('Configure what happens when the plugin is uninstalled.', 'gt-downloads-manager') . '</p>';
+        echo '<p>' . esc_html__('Configure what happens when the plugin is uninstalled.', 'gt-downloads-manager') . '</p>';
     }
 
     public function render_delete_data_field() {
@@ -75,11 +75,11 @@ class Settings {
         <fieldset>
             <label for="gtdm_delete_data">
                 <input type="checkbox" id="gtdm_delete_data" name="gtdm_delete_data_on_uninstall" value="1" <?php checked($delete_data, true); ?>>
-                <?php esc_html_e()('Delete all plugin data when uninstalling', 'gt-downloads-manager'); ?>
+                <?php esc_html_e('Delete all plugin data when uninstalling', 'gt-downloads-manager'); ?>
             </label>
             <p class="description" style="color: #d63638;">
-                <strong><?php esc_html_e()('Warning:', 'gt-downloads-manager'); ?></strong> 
-                <?php esc_html_e()('This will permanently delete all downloads, categories, and settings when the plugin is deleted. This action cannot be undone.', 'gt-downloads-manager'); ?>
+                <strong><?php esc_html_e('Warning:', 'gt-downloads-manager'); ?></strong> 
+                <?php esc_html_e('This will permanently delete all downloads, categories, and settings when the plugin is deleted. This action cannot be undone.', 'gt-downloads-manager'); ?>
             </p>
         </fieldset>
         <?php
