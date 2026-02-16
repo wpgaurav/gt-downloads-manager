@@ -1,0 +1,13 @@
+{
+  "name": "gt-downloads-manager",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "wp-scripts build src/blocks/index.js --output-path=build/blocks --output-filename=index.js",
+    "start": "wp-scripts start src/blocks/index.js --output-path=build/blocks --output-filename=index.js",
+    "lint:js": "wp-scripts lint-js \"src/**/*.js\""
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.0.0"
+  }
+}

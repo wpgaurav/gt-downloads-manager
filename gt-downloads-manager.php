@@ -1,97 +1,67 @@
 <?php
 /*
 Plugin Name: GT Downloads Manager
-Description: Manage downloadable resources
-Version: 1.0
+Description: Manage and showcase downloadable resources with a dedicated custom table, REST API, and dynamic blocks.
+Version: 2.0.0
 Author: Gaurav Tiwari
 Text Domain: gt-downloads-manager
+Requires at least: 6.4
+Requires PHP: 8.1
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 declare(strict_types=1);
 
-if (!defined('ABSPATH')) exit;
+if (! defined('ABSPATH')) {
+    exit;
+}
 
-// Define plugin constants
-define('DM_VERSION', '1.0');
-define('DM_TABLE', $GLOBALS['wpdb']->prefix . 'gtdownloads_manager');
-define('DM_PATH', plugin_dir_path(__FILE__));
-define('DM_URL', plugin_dir_url(__FILE__));
+if (! defined('GTDM_VERSION')) {
+    define('GTDM_VERSION', '2.0.0');
+}
 
-// Include necessary files
-require_once DM_PATH . 'includes/class-database.php';
-require_once DM_PATH . 'includes/class-shortcodes.php';
-require_once DM_PATH . 'includes/class-downloads.php';
-require_once DM_PATH . 'includes/class-admin.php';
-require_once DM_PATH . 'includes/class-widgets.php';
-require_once DM_PATH . 'includes/class-settings.php';
-require_once DM_PATH . 'includes/class-blocks.php'; // Add this line
+if (! defined('GTDM_PLUGIN_FILE')) {
+    define('GTDM_PLUGIN_FILE', __FILE__);
+}
 
-register_activation_hook(__FILE__, ['GTDownloadsManager\Database', 'create_table']);
+if (! defined('GTDM_PLUGIN_BASENAME')) {
+    define('GTDM_PLUGIN_BASENAME', plugin_basename(__FILE__));
+}
 
-// Add in the plugins_loaded callback
-add_action('plugins_loaded', function() {
-    GTDownloadsManager\Downloads::instance();
-    GTDownloadsManager\Shortcodes::instance();
-    GTDownloadsManager\Blocks::instance(); // Add this line
-    
-    // Initialize admin interface only in admin area
-    if (is_admin()) {
-        GTDownloadsManager\Admin::instance();
-        GTDownloadsManager\Settings::instance();
-    }
-    
-    // Register widget
-    add_action('widgets_init', function() {
-        register_widget('GTDownloadsManager\Widget');
-    });
-    
-    // Add download handler
-    add_action('init', function() {
-        if (isset($_GET['dm_download']) && !empty($_GET['nonce'])) {
-            $download_id = intval($_GET['dm_download']);
-            
-            if (wp_verify_nonce($_GET['nonce'], 'download-' . $download_id)) {
-                $downloads = GTDownloadsManager\Downloads::instance();
-                $download_data = $downloads->get_downloads(['id' => $download_id]);
-                
-                if (!empty($download_data)) {
-                    $download = (array)$download_data[0];
-                    
-                    // Track this download
-                    $downloads->track_download($download_id);
-                    
-                    // Determine which URL to use
-                    $file_url = '';
-                    if (!empty($download['direct_url'])) {
-                        $file_url = $download['direct_url'];
-                        wp_redirect($file_url);
-                        exit;
-                    } elseif (!empty($download['file_url'])) {
-                        $file_url = wp_get_attachment_url($download['file_url']);
-                        if ($file_url) {
-                            // Set appropriate headers for download
-                            $file_path = get_attached_file($download['file_url']);
-                            if (file_exists($file_path)) {
-                                header('Content-Description: File Transfer');
-                                header('Content-Type: application/octet-stream');
-                                header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
-                                header('Expires: 0');
-                                header('Cache-Control: must-revalidate');
-                                header('Pragma: public');
-                                header('Content-Length: ' . filesize($file_path));
-                                flush();
-                                readfile($file_path);
-                                exit;
-                            } else {
-                                wp_redirect($file_url);
-                                exit;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
+if (! defined('GTDM_PATH')) {
+    define('GTDM_PATH', plugin_dir_path(__FILE__));
+}
+
+if (! defined('GTDM_URL')) {
+    define('GTDM_URL', plugin_dir_url(__FILE__));
+}
+
+require_once GTDM_PATH . 'includes/Core/Requirements.php';
+require_once GTDM_PATH . 'includes/Core/Upgrade.php';
+require_once GTDM_PATH . 'includes/Core/Activator.php';
+require_once GTDM_PATH . 'includes/Core/Plugin.php';
+
+require_once GTDM_PATH . 'includes/Domain/DownloadRepository.php';
+require_once GTDM_PATH . 'includes/Domain/QueryService.php';
+require_once GTDM_PATH . 'includes/Domain/DownloadService.php';
+
+require_once GTDM_PATH . 'includes/Frontend/Assets.php';
+require_once GTDM_PATH . 'includes/Frontend/Renderer.php';
+require_once GTDM_PATH . 'includes/Frontend/Shortcodes.php';
+require_once GTDM_PATH . 'includes/Frontend/DownloadController.php';
+
+require_once GTDM_PATH . 'includes/Rest/Api.php';
+
+require_once GTDM_PATH . 'includes/Admin/Admin.php';
+
+require_once GTDM_PATH . 'includes/Blocks/Manager.php';
+
+register_activation_hook(__FILE__, ['GTDownloadsManager\\Core\\Activator', 'activate']);
+register_deactivation_hook(__FILE__, ['GTDownloadsManager\\Core\\Activator', 'deactivate']);
+
+if (! GTDownloadsManager\Core\Requirements::maybe_self_deactivate()) {
+    return;
+}
+
+add_action('plugins_loaded', ['GTDownloadsManager\\Core\\Plugin', 'boot']);

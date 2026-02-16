@@ -1,295 +1,268 @@
-/* Admin styles for GT Downloads Manager */
-
-/* General Admin Styling */
-.gtdm-admin-header {
-    background: #fff;
-    border-left: 4px solid #2271b1;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-    margin: 20px 0;
-    padding: 15px;
+.gtdm-admin-page {
+    --gtdm-ink: #0f172a;
+    --gtdm-muted: #475569;
+    --gtdm-surface: #ffffff;
+    --gtdm-soft: #eef3ff;
+    --gtdm-border: #c9d7ff;
+    --gtdm-accent: #1d4ed8;
+    --gtdm-accent-ink: #ffffff;
 }
 
-.gtdm-admin-header h1 {
-    margin-top: 0;
+.gtdm-admin-shell {
+    max-width: 1180px;
+    margin: 18px 0 32px;
 }
 
-.gtdm-admin-subheader {
-    color: #666;
-    font-size: 16px;
-    margin-top: -10px;
-    margin-bottom: 20px;
+.gtdm-admin-hero {
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    color: #f8fbff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
 }
 
-/* Form Elements */
-.dm-form-actions {
-    margin-top: 30px;
-    padding: 20px 0;
-    border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
+.gtdm-admin-hero h1 {
+    margin: 0;
+    color: inherit;
+    font-size: 30px;
+    line-height: 1.2;
 }
 
-.dm-form-actions .button-primary {
-    min-width: 120px;
-}
-
-.form-table th {
-    width: 200px;
-    vertical-align: top;
-    padding-top: 20px;
-}
-
-/* Featured Image Selector */
-.dm-featured-image-container {
-    margin-bottom: 20px;
-}
-
-.dm-featured-image-preview {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    padding: 10px;
-    text-align: center;
-    transition: all 0.2s ease;
-    max-width: 300px;
-    overflow: hidden;
-}
-
-.dm-featured-image-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 3px;
-    display: block;
-    margin: 0 auto;
-}
-
-.dm-featured-image-preview:hover {
-    border-color: #2271b1;
-}
-
-.dm-no-image, .dm-no-file {
-    padding: 40px;
-    background: #f0f0f0;
-    border: 1px dashed #ccc;
-    text-align: center;
-    color: #888;
+.gtdm-admin-hero p {
+    margin: 10px 0 0;
+    color: rgba(248, 251, 255, 0.9);
     font-size: 14px;
-    border-radius: 3px;
 }
 
-.dm-button-group {
-    display: flex;
-    gap: 10px;
+.gtdm-admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
 }
 
-.dm-remove-image, .dm-remove-file {
-    color: #cc0000;
+.gtdm-panel {
+    background: var(--gtdm-surface);
+    border: 1px solid var(--gtdm-border);
+    border-radius: 12px;
+    padding: 16px;
 }
 
-/* File Selection Area */
-.dm-file-selection {
-    margin-top: 20px;
+.gtdm-panel h2 {
+    margin: 0 0 14px;
+    font-size: 16px;
+    color: var(--gtdm-ink);
+}
+
+.gtdm-field {
+    margin-bottom: 14px;
+}
+
+.gtdm-field:last-child {
+    margin-bottom: 0;
+}
+
+.gtdm-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--gtdm-ink);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.gtdm-field input[type='text'],
+.gtdm-field input[type='url'],
+.gtdm-field textarea,
+.gtdm-field select {
+    width: 100%;
+    border: 1px solid #b6c7f9;
+    border-radius: 8px;
+    padding: 8px 10px;
     background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 20px;
 }
 
-.dm-file-selection p {
-    margin-top: 0;
+.gtdm-field textarea {
+    min-height: 90px;
+    resize: vertical;
 }
 
-.dm-file-selection label {
+.gtdm-inline-radio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.gtdm-inline-radio label {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-weight: 500;
 }
 
-.dm-upload-container, .dm-direct-url-container {
-    margin: 15px 0 20px 25px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-left: 4px solid #ddd;
-    border-radius: 0 4px 4px 0;
-}
-
-.dm-file-preview {
-    margin: 10px 0 15px;
+.gtdm-source-panel {
+    margin-top: 12px;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid var(--gtdm-border);
+    border-radius: 10px;
+    background: var(--gtdm-soft);
+}
+
+.gtdm-picker-label {
+    margin: 0;
     background: #fff;
-    min-width: 200px;
-    display: inline-block;
+    border: 1px solid #b6c7f9;
+    border-radius: 8px;
+    min-height: 38px;
+    padding: 8px 10px;
+    color: var(--gtdm-muted);
+    display: flex;
+    align-items: center;
 }
 
-.dm-filename {
-    display: inline-block;
-    word-break: break-all;
-    max-width: 400px;
-    font-family: monospace;
-    color: #333;
-    background: #f1f1f1;
-    padding: 3px 8px;
-    border-radius: 2px;
-}
-
-/* Form Feedback */
-.dm-form #dm-form-feedback {
-    margin: 20px 0 0;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Radio buttons styling */
-.dm-file-selection input[type="radio"] {
-    margin-right: 8px;
-}
-
-/* Downloads List Table */
-.wp-list-table .column-id {
-    width: 60px;
-}
-
-.wp-list-table .column-category {
-    width: 15%;
-}
-
-.wp-list-table .column-date {
-    width: 15%;
-}
-
-.wp-list-table .column-actions {
-    width: 15%;
-    text-align: center;
-}
-
-.download-id {
-    background: #f0f0f0;
-    border-radius: 50%;
-    color: #333;
-    display: inline-block;
+.gtdm-picker-label.is-selected {
+    color: var(--gtdm-ink);
     font-weight: 600;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    width: 24px;
 }
 
-.download-category {
-    background: #e7f5fa;
-    border-radius: 3px;
-    color: #0073aa;
-    display: inline-block;
-    font-size: 12px;
-    padding: 3px 8px;
+.gtdm-picker-preview {
+    margin-top: 10px;
 }
 
-/* Search & Filter Area */
-.tablenav .search-box {
-    float: right;
+.gtdm-picker-preview img {
+    display: block;
+    max-width: 150px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #b6c7f9;
 }
 
-.tablenav-pages {
-    margin: 5px 0;
+.gtdm-picker-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-/* Notice Box Styling */
-.gtdm-notice {
-    background: #f8f9fa;
-    border-left: 4px solid #2271b1;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-    margin: 20px 0;
-    padding: 15px;
+.gtdm-picker-actions .button-secondary,
+.gtdm-action-row .button-secondary {
+    border-color: #1d4ed8;
+    color: #1d4ed8;
 }
 
-.gtdm-notice h3 {
-    margin-top: 0;
-    color: #1d2327;
+.gtdm-action-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
-.gtdm-notice code {
-    background: #f0f2f5;
-    color: #008800;
-    padding: 3px 5px;
-    border-radius: 3px;
-    font-size: 13px;
+.gtdm-action-row .button-primary {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
 }
 
-.gtdm-notice p {
-    margin: 0.5em 0;
-    font-size: 14px;
-    line-height: 1.5;
+.gtdm-action-row .button-hero {
+    min-height: 40px;
+    padding-inline: 16px;
 }
 
-.gtdm-shortcode-grid {
+.gtdm-filter-shell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 14px;
+}
+
+.gtdm-filter-shell input,
+.gtdm-filter-shell select {
+    min-width: 180px;
+}
+
+.gtdm-admin-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gtdm-term-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    grid-template-columns: minmax(260px, 320px) 1fr;
+    gap: 16px;
+    align-items: start;
 }
 
-.gtdm-shortcode-box {
-    background: #fff;
-    border: 1px solid #ddd;
+.gtdm-term-add-form {
+    background: var(--gtdm-surface);
+    border: 1px solid var(--gtdm-border);
+    border-radius: 12px;
+    padding: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.gtdm-term-add-form label {
+    font-weight: 600;
+    color: var(--gtdm-ink);
+}
+
+.gtdm-term-add-form input {
+    border: 1px solid #b6c7f9;
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.gtdm-term-inline-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 6px 6px 0;
+}
+
+.gtdm-term-inline-form input {
+    max-width: 170px;
+    border: 1px solid #b6c7f9;
+    border-radius: 6px;
+    padding: 5px 8px;
+}
+
+.gtdm-term-inline-delete {
+    margin-right: 0;
+}
+
+.gtdm-docs-page code,
+.gtdm-terms-page code {
+    background: #e9efff;
+    border: 1px solid #b7c7f8;
     border-radius: 4px;
-    padding: 15px;
+    padding: 1px 6px;
 }
 
-.gtdm-shortcode-box h4 {
-    margin-top: 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
-    margin-bottom: 12px;
+@media (max-width: 1200px) {
+    .gtdm-term-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
-.gtdm-shortcode-example {
-    background: #f6f7f7;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    font-family: monospace;
-}
+@media (max-width: 782px) {
+    .gtdm-admin-hero h1 {
+        font-size: 24px;
+    }
 
-.gtdm-shortcode-desc {
-    color: #666;
-    font-size: 13px;
-}
+    .gtdm-admin-grid {
+        grid-template-columns: 1fr;
+    }
 
-/* Responsive Adjustments */
-@media screen and (max-width: 782px) {
-    .form-table th {
-        width: 100%;
-        display: block;
-        padding-bottom: 0;
+    .gtdm-action-row {
+        align-items: stretch;
     }
-    
-    .form-table td {
-        display: block;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    .dm-featured-image-preview {
-        max-width: 100%;
-    }
-    
-    .dm-form-actions {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .dm-form-actions .button {
-        width: 100%;
+
+    .gtdm-action-row .button {
+        justify-content: center;
         text-align: center;
-    }
-    
-    .tablenav .search-box {
-        float: none;
-        margin-top: 15px;
         width: 100%;
     }
 }

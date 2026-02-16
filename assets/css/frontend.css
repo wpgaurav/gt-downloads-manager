@@ -1,49 +1,212 @@
-/* Frontend styles for GT Downloads Manager */
+.gtdm-root {
+    margin: 1.5rem 0;
+}
 
-.dm-downloads-container {
+.gtdm-filters {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-.dm-download {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1.5rem;
-}
-.dm-featured-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
     margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f7f9fb;
+    border: 1px solid #d7dee5;
+    border-radius: 8px;
 }
-.dm-download-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: #080808;
+
+.gtdm-filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.gtdm-filter-row label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.gtdm-filter-row input,
+.gtdm-filter-row select {
+    border: 1px solid #c7d0d9;
+    border-radius: 6px;
+    padding: 0.55rem 0.65rem;
+    font-size: 0.95rem;
+}
+
+.gtdm-filter-submit {
+    align-self: end;
+    border: 0;
+    background: #0a6cae;
     color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 1rem;
-    fill:#fff;
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-.dm-download-button:hover {
-    background: #0069a1;
-    color: #fff;
+
+.gtdm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
 }
-.dm-category {
+
+.gtdm-card {
+    border: 1px solid #d9e2ea;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.gtdm-card-media {
+    line-height: 0;
+}
+
+.gtdm-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.gtdm-card-body {
+    padding: 0.9rem;
+}
+
+.gtdm-card-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.06rem;
+}
+
+.gtdm-card-meta {
+    color: #5f6b77;
+    font-size: 0.85rem;
+    margin-bottom: 0.45rem;
+}
+
+.gtdm-card-excerpt {
+    margin-bottom: 0.75rem;
+    line-height: 1.45;
+    color: #2e3640;
+}
+
+.gtdm-card-footer {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 0.5rem;
+    justify-content: space-between;
+    gap: 0.75rem;
 }
-.dm-download-count {
-    font-size: 0.8em;
-    color: #888;
-    margin-top: 0.5rem;
+
+.gtdm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b7db9;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 0.45rem 0.75rem;
+    font-weight: 600;
+}
+
+.gtdm-btn:hover,
+.gtdm-btn:focus {
+    background: #085f8d;
+    color: #fff;
+}
+
+.gtdm-download-count {
+    color: #66717d;
+    font-size: 0.86rem;
+}
+
+.gtdm-table-wrap {
+    overflow-x: auto;
+}
+
+.gtdm-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d9e2ea;
+    background: #fff;
+}
+
+.gtdm-table th,
+.gtdm-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e6edf3;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.gtdm-table th {
+    background: #f4f8fb;
+}
+
+.gtdm-pagination ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 0.45rem;
+    margin: 1rem 0 0;
+    padding: 0;
+}
+
+.gtdm-pagination a,
+.gtdm-pagination span {
+    display: inline-flex;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid #cad5e0;
+    border-radius: 5px;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.gtdm-pagination .current {
+    background: #0b7db9;
+    color: #fff;
+    border-color: #0b7db9;
+}
+
+.gtdm-no-results {
+    padding: 0.8rem;
+    border: 1px dashed #c4ced8;
+    border-radius: 8px;
+}
+
+.gtdm-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@media (max-width: 680px) {
+    .gtdm-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .gtdm-filter-submit {
+        width: 100%;
+    }
+
+    .gtdm-table thead {
+        display: none;
+    }
+
+    .gtdm-table tr {
+        display: block;
+        border-bottom: 1px solid #e6edf3;
+    }
+
+    .gtdm-table td {
+        display: block;
+        text-align: right;
+        position: relative;
+        padding-left: 48%;
+    }
+
+    .gtdm-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+    }
 }

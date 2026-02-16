@@ -1,0 +1,221 @@
+/* Minimal block styles for GT Downloads Manager.
+ * No font-family rules here, so themes stay in control.
+ */
+
+.gtdm-root,
+.gtdm-filters {
+    --gtdm-bg: #ffffff;
+    --gtdm-surface: #f8fafc;
+    --gtdm-border: #d9e1ec;
+    --gtdm-text: #111827;
+    --gtdm-muted: #5b677a;
+    --gtdm-accent: #0f766e;
+    --gtdm-accent-contrast: #ffffff;
+    --gtdm-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .gtdm-root,
+[data-theme="light"] .gtdm-filters {
+    --gtdm-bg: #ffffff;
+    --gtdm-surface: #f8fafc;
+    --gtdm-border: #d9e1ec;
+    --gtdm-text: #111827;
+    --gtdm-muted: #5b677a;
+    --gtdm-accent: #0f766e;
+    --gtdm-accent-contrast: #ffffff;
+    --gtdm-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] .gtdm-root,
+[data-theme="dark"] .gtdm-filters {
+    --gtdm-bg: #0f172a;
+    --gtdm-surface: #111d34;
+    --gtdm-border: #24324e;
+    --gtdm-text: #e5e7eb;
+    --gtdm-muted: #a8b4c8;
+    --gtdm-accent: #22c55e;
+    --gtdm-accent-contrast: #0f172a;
+    --gtdm-shadow: none;
+}
+
+.gtdm-root {
+    color: var(--gtdm-text);
+}
+
+.gtdm-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    padding: 0.875rem;
+    border: 1px solid var(--gtdm-border);
+    border-radius: 12px;
+    background: var(--gtdm-surface);
+    box-shadow: var(--gtdm-shadow);
+}
+
+.gtdm-filter-row {
+    min-width: 0;
+}
+
+.gtdm-filter-row label {
+    display: block;
+    margin: 0 0 0.3rem;
+    font-size: 0.78rem;
+    color: var(--gtdm-muted);
+}
+
+.gtdm-filters input,
+.gtdm-filters select {
+    width: 100%;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.55rem;
+    color: var(--gtdm-text);
+    background: var(--gtdm-bg);
+    border: 1px solid var(--gtdm-border);
+    border-radius: 8px;
+}
+
+.gtdm-filter-submit,
+.gtdm-btn {
+    align-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--gtdm-accent);
+    border-radius: 8px;
+    background: var(--gtdm-accent);
+    color: var(--gtdm-accent-contrast);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.gtdm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.9rem;
+}
+
+.gtdm-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--gtdm-border);
+    border-radius: 12px;
+    background: var(--gtdm-bg);
+    box-shadow: var(--gtdm-shadow);
+    overflow: hidden;
+}
+
+.gtdm-card-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.gtdm-card-body {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0.85rem;
+}
+
+.gtdm-card-title {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.35;
+}
+
+.gtdm-card-meta,
+.gtdm-card-excerpt,
+.gtdm-download-count,
+.gtdm-no-results {
+    color: var(--gtdm-muted);
+    font-size: 0.88rem;
+}
+
+.gtdm-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+}
+
+.gtdm-table-wrap {
+    border: 1px solid var(--gtdm-border);
+    border-radius: 12px;
+    background: var(--gtdm-bg);
+    box-shadow: var(--gtdm-shadow);
+    overflow-x: auto;
+}
+
+.gtdm-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.gtdm-table th,
+.gtdm-table td {
+    text-align: left;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--gtdm-border);
+    color: var(--gtdm-text);
+}
+
+.gtdm-table th {
+    background: var(--gtdm-surface);
+    font-size: 0.86rem;
+}
+
+.gtdm-pagination ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.gtdm-pagination a,
+.gtdm-pagination span {
+    display: inline-flex;
+    min-width: 2rem;
+    min-height: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--gtdm-border);
+    border-radius: 8px;
+    color: var(--gtdm-text);
+    background: var(--gtdm-bg);
+    text-decoration: none;
+}
+
+.gtdm-pagination .current {
+    border-color: var(--gtdm-accent);
+    background: var(--gtdm-accent);
+    color: var(--gtdm-accent-contrast);
+}
+
+.gtdm-filters input:focus,
+.gtdm-filters select:focus,
+.gtdm-btn:focus,
+.gtdm-filter-submit:focus,
+.gtdm-pagination a:focus {
+    outline: 2px solid var(--gtdm-accent);
+    outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+    .gtdm-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .gtdm-table th,
+    .gtdm-table td {
+        padding: 0.55rem 0.6rem;
+        font-size: 0.88rem;
+    }
+}
